@@ -1,0 +1,28 @@
+{
+  "name": "pol",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.31.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "db:migrate": "tsx --env-file=.env scripts/migrate.ts",
+    "db:seed": "tsx --env-file=.env db/seed/seed.ts",
+    "db:reset": "tsx --env-file=.env scripts/migrate.ts --reset && tsx --env-file=.env db/seed/seed.ts",
+    "api:dev": "pnpm --filter @pol/api dev",
+    "web:dev": "pnpm --filter @pol/web dev",
+    "scores": "pnpm --filter @pol/api scores",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "cdk": "pnpm --filter @pol/infra cdk"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "@types/pg": "^8.23.1",
+    "pg": "^8.23.1",
+    "@aws-sdk/client-rds-data": "^3.1156.0",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
+  }
+}

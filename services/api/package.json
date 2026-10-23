@@ -1,0 +1,28 @@
+{
+  "name": "@pol/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../../.env src/local.ts",
+    "scores": "tsx --env-file=../../.env src/cli/scores.ts",
+    "test": "tsx --test 'src/**/*.test.ts'",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-rds-data": "^3.1156.0",
+    "@pol/shared": "workspace:*",
+    "aws-jwt-verify": "^5.2.1",
+    "hono": "^4.13.13",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^2.1.5",
+    "@types/aws-lambda": "^8.10.164",
+    "@types/node": "^22.19.0",
+    "@types/pg": "^8.23.1",
+    "pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
+  }
+}

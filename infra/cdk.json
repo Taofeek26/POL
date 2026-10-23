@@ -1,0 +1,7 @@
+{
+  "app": "npx tsx bin/pol.ts",
+  "context": {
+    "stage": "dev",
+    "webOrigins": "http://localhost:3000"
+  }
+}
