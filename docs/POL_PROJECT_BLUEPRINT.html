@@ -1,0 +1,2823 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>POL Project Blueprint</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  :root{--bg:#f7f7f4;--surface:#fff;--text:#1d2125;--muted:#5b636b;--border:#e1e3e0;--accent:#0f6b4f;--accent-soft:#e3f1ec;--code:#f0f1ee;--th:#eef2ef}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121514;--surface:#1a1e1c;--text:#e6e9e7;--muted:#a0a8a4;--border:#2c3330;--accent:#4fc597;--accent-soft:#1e3a2f;--code:#222826;--th:#212826}}
+  :root[data-theme="dark"]{--bg:#121514;--surface:#1a1e1c;--text:#e6e9e7;--muted:#a0a8a4;--border:#2c3330;--accent:#4fc597;--accent-soft:#1e3a2f;--code:#222826;--th:#212826}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:none;padding:0}
+  .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:0;min-height:100vh}
+  nav#TOC{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);padding:24px 18px;font-size:14px}
+  nav#TOC summary{cursor:pointer;display:block;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  nav#TOC ul{list-style:none;padding-left:0;margin:0}
+  nav#TOC ul ul{padding-left:14px;display:none}
+  nav#TOC li{margin:3px 0}
+  nav#TOC a{color:var(--text);text-decoration:none;display:block;padding:3px 6px;border-radius:6px}
+  nav#TOC a:hover{background:var(--accent-soft);color:var(--accent)}
+  main{padding:40px 48px 80px;max-width:1000px;width:100%}
+  header#title-block-header{background:var(--accent);color:#fff;margin:-40px -48px 32px;padding:48px 48px 36px}
+  header#title-block-header{text-align:left}
+  header#title-block-header h1{margin:0;font-size:2.4rem;border:0;color:#fff}
+  header .subtitle{font-size:1.15rem;opacity:.92;margin:8px 0 6px}
+  header .date{opacity:.8;font-size:.95rem;margin:0}
+  h1{font-size:1.75rem;margin:56px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--accent);scroll-margin-top:16px}
+  h2{font-size:1.3rem;margin:36px 0 12px;color:var(--accent);scroll-margin-top:16px}
+  h3{font-size:1.1rem;margin:24px 0 8px}
+  a{color:var(--accent)}
+  p,li{max-width:75ch}
+  table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14.5px;background:var(--surface);display:block;overflow-x:auto;width:max-content;max-width:100%}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--th);font-weight:600}
+  tbody tr:hover{background:var(--accent-soft)}
+  blockquote{margin:16px 0;padding:12px 18px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0}
+  blockquote p{margin:6px 0}
+  pre{background:var(--code);border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;font-size:13.5px;line-height:1.5}
+  code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em}
+  pre code{background:none;padding:0}
+  hr{border:0;border-top:1px solid var(--border);margin:40px 0}
+  ul.task-list{list-style:none;padding-left:4px}
+  input[type=checkbox]{accent-color:var(--accent);margin-right:8px}
+  .theme-toggle{position:fixed;top:14px;right:16px;z-index:5;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+  @media (max-width:900px){.layout{display:flex;flex-direction:column}main{order:1}nav#TOC{order:2;position:fixed!important;inset:auto 0 0 0;max-height:70vh;z-index:4;box-shadow:0 -4px 16px rgba(0,0,0,.15)}nav#TOC details:not([open]) summary{padding:4px 0}nav#TOC{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border);padding:16px}main{padding:24px 16px 60px}header#title-block-header{margin:-24px -16px 24px;padding:36px 16px 24px}header#title-block-header h1{font-size:1.8rem}.theme-toggle{top:10px;right:10px}main{padding-bottom:90px}}
+  @media print{nav#TOC,.theme-toggle{display:none}.layout{display:block}main{max-width:none}}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">POL — Project Blueprint</h1>
+<p class="subtitle">A fact-based public scorecard for every elected and
+appointed office in Nigeria, from ward councillor to President</p>
+<p class="date">October 2026 · Version 1.0</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#0-how-to-read-this-document"
+id="toc-0-how-to-read-this-document">0. How to read this
+document</a></li>
+<li><a href="#1-executive-summary" id="toc-1-executive-summary">1.
+Executive summary</a></li>
+<li><a href="#2-the-problem-in-detail"
+id="toc-2-the-problem-in-detail">2. The problem in detail</a>
+<ul>
+<li><a href="#21-what-citizens-face-today"
+id="toc-21-what-citizens-face-today">2.1 What citizens face
+today</a></li>
+<li><a
+href="#22-who-has-tried-parts-of-this-learn-from-them-partner-where-possible"
+id="toc-22-who-has-tried-parts-of-this-learn-from-them-partner-where-possible">2.2
+Who has tried parts of this (learn from them, partner where
+possible)</a></li>
+<li><a href="#23-what-makes-pol-different"
+id="toc-23-what-makes-pol-different">2.3 What makes POL
+different</a></li>
+</ul></li>
+<li><a href="#3-vision-mission-and-principles"
+id="toc-3-vision-mission-and-principles">3. Vision, mission and
+principles</a></li>
+<li><a href="#4-users-and-their-needs"
+id="toc-4-users-and-their-needs">4. Users and their needs</a></li>
+<li><a href="#5-scope-every-office-pol-tracks"
+id="toc-5-scope-every-office-pol-tracks">5. Scope: every office POL
+tracks</a>
+<ul>
+<li><a href="#51-elected-offices" id="toc-51-elected-offices">5.1
+Elected offices</a></li>
+<li><a href="#52-appointed-offices-phase-b-onwards"
+id="toc-52-appointed-offices-phase-b-onwards">5.2 Appointed offices
+(Phase B onwards)</a></li>
+<li><a href="#53-candidates-election-periods"
+id="toc-53-candidates-election-periods">5.3 Candidates (election
+periods)</a></li>
+<li><a href="#54-geography" id="toc-54-geography">5.4 Geography</a></li>
+</ul></li>
+<li><a href="#6-product-specification"
+id="toc-6-product-specification">6. Product specification</a>
+<ul>
+<li><a href="#61-core-screens" id="toc-61-core-screens">6.1 Core
+screens</a></li>
+<li><a href="#62-reactions-what-users-can-and-cannot-do"
+id="toc-62-reactions-what-users-can-and-cannot-do">6.2 Reactions (what
+users can and cannot do)</a></li>
+<li><a href="#63-notifications" id="toc-63-notifications">6.3
+Notifications</a></li>
+<li><a href="#64-access-for-everyone"
+id="toc-64-access-for-everyone">6.4 Access for everyone</a></li>
+<li><a href="#65-official-accounts-for-politicians"
+id="toc-65-official-accounts-for-politicians">6.5 Official accounts (for
+politicians)</a></li>
+</ul></li>
+<li><a href="#7-data-sources-collection-and-verification"
+id="toc-7-data-sources-collection-and-verification">7. Data: sources,
+collection and verification</a>
+<ul>
+<li><a href="#71-data-sources" id="toc-71-data-sources">7.1 Data
+sources</a></li>
+<li><a href="#72-the-news-to-official-pipeline"
+id="toc-72-the-news-to-official-pipeline">7.2 The news-to-official
+pipeline</a></li>
+<li><a href="#73-citizen-project-verification"
+id="toc-73-citizen-project-verification">7.3 Citizen project
+verification</a></li>
+<li><a href="#74-field-network" id="toc-74-field-network">7.4 Field
+network</a></li>
+<li><a href="#75-the-data-gap-at-lga-and-ward-level-and-how-to-close-it"
+id="toc-75-the-data-gap-at-lga-and-ward-level-and-how-to-close-it">7.5
+The data gap at LGA and ward level, and how to close it</a></li>
+</ul></li>
+<li><a href="#8-the-scoring-method" id="toc-8-the-scoring-method">8. The
+scoring method</a>
+<ul>
+<li><a href="#81-design-rules" id="toc-81-design-rules">8.1 Design
+rules</a></li>
+<li><a href="#82-performance-score-0100"
+id="toc-82-performance-score-0100">8.2 Performance Score
+(0–100)</a></li>
+<li><a href="#83-citizen-approval-bar"
+id="toc-83-citizen-approval-bar">8.3 Citizen Approval bar</a></li>
+<li><a href="#84-worked-example-illustrative-only"
+id="toc-84-worked-example-illustrative-only">8.4 Worked example
+(illustrative only)</a></li>
+<li><a href="#85-score-governance" id="toc-85-score-governance">8.5
+Score governance</a></li>
+</ul></li>
+<li><a href="#9-technology" id="toc-9-technology">9. Technology</a>
+<ul>
+<li><a href="#91-recommended-stack" id="toc-91-recommended-stack">9.1
+Recommended stack</a></li>
+<li><a href="#92-core-data-model-simplified"
+id="toc-92-core-data-model-simplified">9.2 Core data model
+(simplified)</a></li>
+<li><a href="#93-key-engineering-requirements"
+id="toc-93-key-engineering-requirements">9.3 Key engineering
+requirements</a></li>
+<li><a href="#94-ai-use-rules" id="toc-94-ai-use-rules">9.4 AI use:
+rules</a></li>
+</ul></li>
+<li><a href="#10-content-editorial-and-moderation"
+id="toc-10-content-editorial-and-moderation">10. Content, editorial and
+moderation</a>
+<ul>
+<li><a href="#101-editorial-team-initial"
+id="toc-101-editorial-team-initial">10.1 Editorial team
+(initial)</a></li>
+<li><a href="#102-moderation-rules-for-comments"
+id="toc-102-moderation-rules-for-comments">10.2 Moderation rules for
+comments</a></li>
+<li><a href="#103-editorial-handbook-write-before-launch"
+id="toc-103-editorial-handbook-write-before-launch">10.3 Editorial
+handbook (write before launch)</a></li>
+<li><a href="#104-balance-monitoring"
+id="toc-104-balance-monitoring">10.4 Balance monitoring</a></li>
+</ul></li>
+<li><a href="#11-legal-and-regulatory-framework"
+id="toc-11-legal-and-regulatory-framework">11. Legal and regulatory
+framework</a>
+<ul>
+<li><a href="#111-company-setup" id="toc-111-company-setup">11.1 Company
+setup</a></li>
+<li><a href="#112-data-protection-nigeria-data-protection-act-2023-ndpa"
+id="toc-112-data-protection-nigeria-data-protection-act-2023-ndpa">11.2
+Data protection: Nigeria Data Protection Act 2023 (NDPA)</a></li>
+<li><a href="#113-defamation-and-publication-risk"
+id="toc-113-defamation-and-publication-risk">11.3 Defamation and
+publication risk</a></li>
+<li><a href="#114-cybercrimes-act-2015-as-amended-2024"
+id="toc-114-cybercrimes-act-2015-as-amended-2024">11.4 Cybercrimes Act
+2015 (as amended 2024)</a></li>
+<li><a href="#115-electoral-law" id="toc-115-electoral-law">11.5
+Electoral law</a></li>
+<li><a href="#116-copyright-copyright-act-2022"
+id="toc-116-copyright-copyright-act-2022">11.6 Copyright: Copyright Act
+2022</a></li>
+<li><a href="#117-other-regulators-and-rules"
+id="toc-117-other-regulators-and-rules">11.7 Other regulators and
+rules</a></li>
+<li><a href="#118-freedom-of-information-act-2011"
+id="toc-118-freedom-of-information-act-2011">11.8 Freedom of Information
+Act 2011</a></li>
+</ul></li>
+<li><a href="#12-risk-register" id="toc-12-risk-register">12. Risk
+register</a>
+<ul>
+<li><a href="#121-trust-and-integrity-risks"
+id="toc-121-trust-and-integrity-risks">12.1 Trust and integrity
+risks</a></li>
+<li><a href="#122-legal-and-political-risks"
+id="toc-122-legal-and-political-risks">12.2 Legal and political
+risks</a></li>
+<li><a href="#123-security-risks" id="toc-123-security-risks">12.3
+Security risks</a></li>
+<li><a href="#124-platform-and-data-supply-risks"
+id="toc-124-platform-and-data-supply-risks">12.4 Platform and data
+supply risks</a></li>
+<li><a href="#125-business-risks" id="toc-125-business-risks">12.5
+Business risks</a></li>
+<li><a href="#126-social-harm-risks" id="toc-126-social-harm-risks">12.6
+Social harm risks</a></li>
+<li><a href="#127-crisis-playbook-prepare-before-launch"
+id="toc-127-crisis-playbook-prepare-before-launch">12.7 Crisis playbook
+(prepare before launch)</a></li>
+</ul></li>
+<li><a href="#13-brand-distribution-and-social-media-handles"
+id="toc-13-brand-distribution-and-social-media-handles">13. Brand,
+distribution and social media handles</a>
+<ul>
+<li><a href="#131-name-and-brand" id="toc-131-name-and-brand">13.1 Name
+and brand</a></li>
+<li><a href="#132-the-pol-social-handles"
+id="toc-132-the-pol-social-handles">13.2 The POL social handles</a></li>
+<li><a href="#133-automated-scorecard-posting-done-safely"
+id="toc-133-automated-scorecard-posting-done-safely">13.3 Automated
+scorecard posting, done safely</a></li>
+<li><a href="#134-growth-tactics" id="toc-134-growth-tactics">13.4
+Growth tactics</a></li>
+</ul></li>
+<li><a href="#14-business-model-and-revenue"
+id="toc-14-business-model-and-revenue">14. Business model and
+revenue</a>
+<ul>
+<li><a href="#141-revenue-principles"
+id="toc-141-revenue-principles">14.1 Revenue principles</a></li>
+<li><a href="#142-revenue-streams" id="toc-142-revenue-streams">14.2
+Revenue streams</a></li>
+<li><a
+href="#143-revenue-estimates-illustrative-scenarios-recalculate-with-real-data"
+id="toc-143-revenue-estimates-illustrative-scenarios-recalculate-with-real-data">14.3
+Revenue estimates (illustrative scenarios; recalculate with real
+data)</a></li>
+<li><a href="#144-key-metrics-kpis" id="toc-144-key-metrics-kpis">14.4
+Key metrics (KPIs)</a></li>
+</ul></li>
+<li><a href="#15-roadmap-from-today-to-a-national-platform"
+id="toc-15-roadmap-from-today-to-a-national-platform">15. Roadmap: from
+today to a national platform</a>
+<ul>
+<li><a href="#phase-0-foundation-weeks-04"
+id="toc-phase-0-foundation-weeks-04">Phase 0: Foundation (weeks
+0–4)</a></li>
+<li><a href="#phase-a-election-sprint-months-14-before-the-elections"
+id="toc-phase-a-election-sprint-months-14-before-the-elections">Phase A:
+Election Sprint (months 1–4, before the elections)</a></li>
+<li><a href="#phase-b-day-one-tracking-months-410-from-inauguration"
+id="toc-phase-b-day-one-tracking-months-410-from-inauguration">Phase B:
+Day-One Tracking (months 4–10, from inauguration)</a></li>
+<li><a href="#phase-c-national-scale-months-1024"
+id="toc-phase-c-national-scale-months-1024">Phase C: National scale
+(months 10–24)</a></li>
+<li><a href="#phase-d-mature-platform-years-24"
+id="toc-phase-d-mature-platform-years-24">Phase D: Mature platform
+(years 2–4)</a></li>
+</ul></li>
+<li><a href="#16-team-and-budget" id="toc-16-team-and-budget">16. Team
+and budget</a>
+<ul>
+<li><a href="#161-team-plan" id="toc-161-team-plan">16.1 Team
+plan</a></li>
+<li><a
+href="#162-budget-estimates-monthly-lagosabuja-based-mid-range-verify-current-salaries"
+id="toc-162-budget-estimates-monthly-lagosabuja-based-mid-range-verify-current-salaries">16.2
+Budget estimates (monthly, Lagos/Abuja-based, mid-range; <strong>[verify
+current salaries]</strong>)</a></li>
+<li><a href="#163-funding-plan" id="toc-163-funding-plan">16.3 Funding
+plan</a></li>
+</ul></li>
+<li><a href="#17-measuring-social-impact"
+id="toc-17-measuring-social-impact">17. Measuring social impact</a></li>
+<li><a href="#18-launch-checklist" id="toc-18-launch-checklist">18.
+Launch checklist</a></li>
+<li><a href="#19-glossary" id="toc-19-glossary">19. Glossary</a></li>
+<li><a href="#20-next-steps-the-next-14-days"
+id="toc-20-next-steps-the-next-14-days">20. Next steps (the next 14
+days)</a></li>
+</ul>
+</nav>
+<h1 id="0-how-to-read-this-document">0. How to read this document</h1>
+<p>This blueprint covers the whole project, from the idea to a
+sustainable company. It is written so a founder, a developer, an
+investor, a grant officer or a lawyer can each find their section.</p>
+<table>
+<thead>
+<tr class="header">
+<th>If you are…</th>
+<th>Read first</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The founder</td>
+<td>1, 2, 4, 13, 15, 16</td>
+</tr>
+<tr class="even">
+<td>A developer</td>
+<td>6, 7, 8, 9</td>
+</tr>
+<tr class="odd">
+<td>An editor or researcher</td>
+<td>5, 6, 10</td>
+</tr>
+<tr class="even">
+<td>A lawyer or adviser</td>
+<td>11, 12</td>
+</tr>
+<tr class="odd">
+<td>An investor or funder</td>
+<td>1, 3, 14, 15, 17</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Working name:</strong> <em>POL</em>, short for "Public
+Officials Ledger". Treat it as a placeholder until a name and trademark
+search is done (see 13.1).</p>
+<p><strong>Important caveats.</strong> Laws, platform rules, API prices,
+exchange rates and election dates change. Every figure marked
+<strong>[verify]</strong> must be checked against the official source
+before you act on it. All money figures are planning estimates, not
+quotes. None of this is legal advice: hire a Nigerian lawyer before
+launch (see 11).</p>
+<hr />
+<h1 id="1-executive-summary">1. Executive summary</h1>
+<p><strong>The problem.</strong> Most Nigerians cannot easily find out
+what their elected and appointed officials have actually done.
+Information is scattered across press releases, partisan social media,
+newspapers and budget documents nobody reads. Election choices are
+therefore driven by party, ethnicity, religion, money and hearsay more
+than by record. At local level (LGA chairmen, councillors, state
+assembly members) there is almost no public record at all.</p>
+<p><strong>The product.</strong> POL is a mobile app, website and set of
+social media channels that:</p>
+<ol type="1">
+<li>Lists <strong>every political office</strong> in Nigeria (federal,
+state, LGA, ward) and who holds it.</li>
+<li>Pulls in <strong>verified news and official data</strong> about what
+each office holder has done, and attaches each item to the right
+person.</li>
+<li>Lets <strong>citizens react</strong> to each item: thumbs up/down,
+plus "this is impactful", "this claim is false" and "show me evidence".
+Ordinary users <strong>cannot write posts</strong>. They can only react
+and comment on curated items.</li>
+<li>Shows <strong>two separate scores</strong> for every official:
+<ul>
+<li><strong>Performance Score (0–100):</strong> based on facts that can
+be checked (projects confirmed on the ground, budget performance, bills,
+attendance, promises kept).</li>
+<li><strong>Citizen Approval bar:</strong> based on reactions, weighted
+so that verified residents count most and bots count for nothing.</li>
+</ul></li>
+<li>Publishes <strong>scorecards and rankings</strong> on X, Facebook,
+Instagram, TikTok, YouTube and WhatsApp Channels, which drives traffic
+and revenue.</li>
+</ol>
+<p><strong>Why two scores instead of one.</strong> If reactions alone
+decide the score, it measures popularity and party loyalty, not
+performance. Paid online teams and bots will capture it within weeks,
+and the platform will lose the trust it depends on. Keeping facts and
+opinion separate is the single most important design decision in this
+document.</p>
+<p><strong>How it makes money</strong> (detailed in 14): advertising and
+social media monetisation from traffic; a paid <strong>POL Pro</strong>
+data service for media, researchers, embassies, banks and risk analysts;
+licensing scorecards to TV and radio during elections; grants from
+civic-tech and democracy funders; and optional premium memberships. POL
+will <strong>never</strong> take money from politicians or parties to
+change, hide or promote a score.</p>
+<p><strong>Timing.</strong> Nigeria's next general elections are due in
+early 2027 <strong>[verify INEC's final timetable]</strong>, so the
+campaign season is running now. That gives a two-stage plan (detailed in
+15):</p>
+<ul>
+<li><strong>Stage A, "Election Sprint" (now until the
+elections):</strong> a lean product with fact sheets and records for
+incumbents and leading candidates, focused on Presidency, governors,
+Senate and House of Representatives.</li>
+<li><strong>Stage B, "Day-One Tracking" (from inauguration, 29 May
+2027):</strong> the full platform starts every new term's clock on day
+one, so by 2031 there will be a complete four-year record of every
+office holder. This is the real long-term value.</li>
+</ul>
+<hr />
+<h1 id="2-the-problem-in-detail">2. The problem in detail</h1>
+<h2 id="21-what-citizens-face-today">2.1 What citizens face today</h2>
+<ul>
+<li><strong>No single place</strong> lists who holds which office,
+especially below state level.</li>
+<li><strong>Official claims cannot be verified.</strong> Projects are
+announced, "flagged off" or commissioned for photos, then abandoned.
+Citizens have no easy way to check.</li>
+<li><strong>Social media is partisan.</strong> Supporters and opponents
+of every politician run organised online teams. Truth gets drowned
+out.</li>
+<li><strong>Budget data exists but is unreadable</strong> for most
+people (PDF budgets, Open Treasury payment records, audit reports).</li>
+<li><strong>Local government is a black hole.</strong> The 774 LGAs
+receive large federal allocations but publish little about how it is
+spent.</li>
+<li><strong>Voters decide on hearsay</strong> because nothing better is
+available.</li>
+</ul>
+<h2
+id="22-who-has-tried-parts-of-this-learn-from-them-partner-where-possible">2.2
+Who has tried parts of this (learn from them, partner where
+possible)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Organisation</th>
+<th>What they do</th>
+<th>Lesson for POL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BudgIT / Tracka</td>
+<td>Budget transparency; Tracka tracks constituency projects</td>
+<td>Field verification works; partner on project data</td>
+</tr>
+<tr class="even">
+<td>OrderPaper Nigeria</td>
+<td>Tracks National Assembly bills, votes and legislators</td>
+<td>Good federal legislative data; possible data partner</td>
+</tr>
+<tr class="odd">
+<td>Yiaga Africa</td>
+<td>Election observation, governance research</td>
+<td>Credible neutral partner for election-season content</td>
+</tr>
+<tr class="even">
+<td>Dataphyte, Premium Times (PTCIJ), TheCable, Daily Trust, etc.</td>
+<td>Data journalism and fact-checking</td>
+<td>Source and verification partners</td>
+</tr>
+<tr class="odd">
+<td>Africa Check, Dubawa, FactCheckHub</td>
+<td>Fact-checking</td>
+<td>Partners for the "this claim is false" workflow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[verify]</strong> each organisation's current programmes
+before reaching out. POL should present itself as <strong>the
+citizen-facing layer that brings their work together and spreads it
+widely</strong>, not as a competitor. That makes partnerships, data
+sharing and grants much easier.</p>
+<h2 id="23-what-makes-pol-different">2.3 What makes POL different</h2>
+<ol type="1">
+<li><strong>Every level, every state</strong>, all the way down to ward
+councillors.</li>
+<li><strong>A consumer app with a feed</strong>, not a report or
+dashboard. It is built for everyday phones and everyday attention.</li>
+<li><strong>A transparent scoring method</strong> that anyone can
+inspect.</li>
+<li><strong>Citizen verification of projects</strong> with geotagged
+photos.</li>
+<li><strong>Distribution through social media handles</strong>, so the
+scores reach people who will never install an app.</li>
+</ol>
+<hr />
+<h1 id="3-vision-mission-and-principles">3. Vision, mission and
+principles</h1>
+<p><strong>Vision:</strong> Every Nigerian votes on the record, not on
+rumour.</p>
+<p><strong>Mission:</strong> Make the performance of every public office
+holder in Nigeria visible, verifiable and easy to understand.</p>
+<p><strong>Non-negotiable principles.</strong> Publish these on the
+website. They are both your brand and your legal protection.</p>
+<ol type="1">
+<li><strong>Non-partisan.</strong> No party, candidate or government
+pays to influence content or scores. Ever.</li>
+<li><strong>Facts first.</strong> Every performance claim links to a
+source. Opinion is always labelled as opinion.</li>
+<li><strong>Transparent method.</strong> The scoring formula is public
+and versioned. Any change is announced.</li>
+<li><strong>Right of reply.</strong> Every official can respond to any
+item about them, and the response is shown next to it.</li>
+<li><strong>Corrections in public.</strong> Mistakes are corrected
+openly with a visible correction note.</li>
+<li><strong>Citizen privacy.</strong> No selling personal data. Users
+can react without their identity being public.</li>
+<li><strong>Equal treatment.</strong> The same rules apply to the ruling
+party and the opposition, the North and the South, men and women.</li>
+</ol>
+<hr />
+<h1 id="4-users-and-their-needs">4. Users and their needs</h1>
+<table>
+<thead>
+<tr class="header">
+<th>User</th>
+<th>Need</th>
+<th>What POL gives them</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ordinary voter (18–45, mobile-first, Android)</td>
+<td>"Who is my councillor? Did my governor do anything?"</td>
+<td>Location-based "My Leaders" page, simple scores, short news</td>
+</tr>
+<tr class="even">
+<td>Young first-time voter</td>
+<td>Shareable, easy-to-read content</td>
+<td>Social cards, short videos, rankings</td>
+</tr>
+<tr class="odd">
+<td>Diaspora Nigerian</td>
+<td>Follow their home state</td>
+<td>State and LGA following, newsletters</td>
+</tr>
+<tr class="even">
+<td>Journalist</td>
+<td>Fast, sourced facts</td>
+<td>Searchable records, embeddable widgets, POL Pro</td>
+</tr>
+<tr class="odd">
+<td>Civil society organisation / NGO</td>
+<td>Evidence for advocacy</td>
+<td>Data exports, reports</td>
+</tr>
+<tr class="even">
+<td>Researcher / academic</td>
+<td>Structured historical data</td>
+<td>API, bulk datasets</td>
+</tr>
+<tr class="odd">
+<td>Diplomat / development partner / risk analyst / investor</td>
+<td>Governance quality by state</td>
+<td>Pro dashboards, quarterly reports</td>
+</tr>
+<tr class="even">
+<td>Politician / office holder</td>
+<td>Fair representation, right of reply</td>
+<td>Verified official account to respond and submit evidence</td>
+</tr>
+<tr class="odd">
+<td>Advertiser / brand</td>
+<td>Reach engaged adult audience</td>
+<td>Ad inventory, sponsored non-partisan voter education</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Primary persona: "Aisha, 27, Kano."</strong> Aisha has an
+Android phone with limited data, uses WhatsApp, X and TikTok, and speaks
+Hausa and English. She is not sure who represents her ward.
+<strong>Design rule:</strong> if it doesn't work for Aisha on a ₦70,000
+phone on 3G, it doesn't ship.</p>
+<hr />
+<h1 id="5-scope-every-office-pol-tracks">5. Scope: every office POL
+tracks</h1>
+<h2 id="51-elected-offices">5.1 Elected offices</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Office</th>
+<th>Approx. number</th>
+<th>Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Federal</td>
+<td>President, Vice President</td>
+<td>2</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td>Federal</td>
+<td>Senators</td>
+<td>109</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>Federal</td>
+<td>Members, House of Representatives</td>
+<td>360</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td>State</td>
+<td>Governors, Deputy Governors</td>
+<td>36 + 36</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>State</td>
+<td>Members, State Houses of Assembly</td>
+<td>~990 <strong>[verify]</strong></td>
+<td>B (pilot state first)</td>
+</tr>
+<tr class="even">
+<td>LGA</td>
+<td>LGA / Area Council Chairmen (774, incl. 6 FCT Area Councils)</td>
+<td>774</td>
+<td>B (pilot state first)</td>
+</tr>
+<tr class="odd">
+<td>Ward</td>
+<td>Councillors</td>
+<td>~8,800 (≈ number of wards) <strong>[verify]</strong></td>
+<td>B (pilot state first)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-appointed-offices-phase-b-onwards">5.2 Appointed offices
+(Phase B onwards)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Office</th>
+<th>Approx. number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Federal Ministers &amp; Ministers of State</td>
+<td>~45–50</td>
+</tr>
+<tr class="even">
+<td>Heads of key federal agencies (FERMA, NDDC, REA, UBEC, etc.)</td>
+<td>~50 selected</td>
+</tr>
+<tr class="odd">
+<td>State Commissioners</td>
+<td>~800–1,000</td>
+</tr>
+<tr class="even">
+<td>FCT Minister</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="53-candidates-election-periods">5.3 Candidates (election
+periods)</h2>
+<p>During campaigns POL adds <strong>candidate profiles</strong>:
+background, past offices and their records, declared manifesto promises,
+debate attendance, and any court cases (public record only). Candidates
+are <strong>never scored</strong> before they hold office. They get a
+"record" panel only if they held a previous office.</p>
+<h2 id="54-geography">5.4 Geography</h2>
+<ul>
+<li>36 states + FCT, 774 LGAs, ~8,809 wards <strong>[verify current INEC
+ward count]</strong>, 109 senatorial districts, 360 federal
+constituencies, state constituencies.</li>
+<li>Users are mapped to their leaders by <strong>polling unit /
+ward</strong>, chosen manually or detected from location with
+consent.</li>
+</ul>
+<hr />
+<h1 id="6-product-specification">6. Product specification</h1>
+<h2 id="61-core-screens">6.1 Core screens</h2>
+<ol type="1">
+<li><strong>Onboarding:</strong> choose language → pick state → LGA →
+ward (or "use my location") → optional phone verification.</li>
+<li><strong>My Leaders:</strong> every office holder who represents the
+user, from councillor to President. Each shows a photo, party, time in
+office, Performance Score and Citizen Approval bar.</li>
+<li><strong>Feed:</strong> curated news items about the user's leaders
+first, then their state, then national. Filters: level, state, topic
+(roads, health, education, water, security, power, agriculture).</li>
+<li><strong>Official Profile:</strong>
+<ul>
+<li>Header: photo, office, party, term start/end, constituency map.</li>
+<li><strong>Performance Score</strong> with breakdown and a "how this is
+calculated" link.</li>
+<li><strong>Citizen Approval bar</strong> (green/red), with the count of
+verified residents behind it.</li>
+<li><strong>Timeline</strong> of news items, projects, bills and
+votes.</li>
+<li><strong>Promises tracker:</strong> kept / in progress / stalled /
+broken / not rated.</li>
+<li><strong>Projects map:</strong> pins with status and citizen
+photos.</li>
+<li><strong>Right of reply</strong> section.</li>
+</ul></li>
+<li><strong>News Item:</strong> headline, short neutral summary, source
+links, which officials it is linked to, a claim type (announcement /
+completed / verified on ground / disputed), reactions and comments.</li>
+<li><strong>Project Page:</strong> location, budget, contractor (if
+public), dates, status history, citizen photos, verification
+status.</li>
+<li><strong>Compare:</strong> two officials or candidates side by
+side.</li>
+<li><strong>Rankings:</strong> best and worst by office type, state and
+topic, with filters and the method explained.</li>
+<li><strong>Verify a Project:</strong> citizen submits a geotagged photo
+plus a status: exists and working / exists, not working / abandoned /
+never started / can't find it.</li>
+<li><strong>Settings:</strong> language, data saver, notifications,
+privacy, delete account.</li>
+</ol>
+<h2 id="62-reactions-what-users-can-and-cannot-do">6.2 Reactions (what
+users can and cannot do)</h2>
+<p>Users <strong>cannot create posts</strong>. On each item they
+can:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Reaction</th>
+<th>Meaning</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>👍 Thumbs up</td>
+<td>"Good work"</td>
+<td>Counts toward Citizen Approval</td>
+</tr>
+<tr class="even">
+<td>👎 Thumbs down</td>
+<td>"Bad / not enough"</td>
+<td>Counts toward Citizen Approval</td>
+</tr>
+<tr class="odd">
+<td>⭐ Impactful</td>
+<td>"This changed my community"</td>
+<td>Signals importance; surfaces the item; no score effect</td>
+</tr>
+<tr class="even">
+<td>⚠️ Disputed</td>
+<td>"This claim is false / exaggerated"</td>
+<td>Sends the item to the verification queue if threshold reached</td>
+</tr>
+<tr class="odd">
+<td>🔍 Show evidence</td>
+<td>"I want proof"</td>
+<td>Increases priority for a field check</td>
+</tr>
+<tr class="even">
+<td>💬 Comment</td>
+<td>Text reply (moderated)</td>
+<td>No score effect</td>
+</tr>
+</tbody>
+</table>
+<p>Using "Disputed" and "Show evidence" rather than only like/dislike
+turns the crowd into <strong>fact-checkers</strong>, not just
+cheerleaders.</p>
+<h2 id="63-notifications">6.3 Notifications</h2>
+<ul>
+<li>New item about one of <em>my</em> leaders.</li>
+<li>A project near me needs verification.</li>
+<li>A promise status changed.</li>
+<li>Weekly "Your leaders this week" digest, which also goes out by
+WhatsApp and email.</li>
+</ul>
+<h2 id="64-access-for-everyone">6.4 Access for everyone</h2>
+<ul>
+<li><strong>Languages:</strong> English, Nigerian Pidgin, Hausa, Yoruba,
+Igbo (launch with English + Pidgin + one more; add the rest within 6
+months).</li>
+<li><strong>Data-light:</strong> app under 15 MB, compressed images,
+text-first mode, offline caching of My Leaders.</li>
+<li><strong>Lite web</strong> (works on Opera Mini and KaiOS-class
+browsers).</li>
+<li><strong>WhatsApp bot:</strong> "Who is my councillor?", "Send me my
+governor's score", weekly digest. WhatsApp reaches far more people than
+any app.</li>
+<li><strong>USSD / SMS (later phase):</strong> look up an official's
+score with a short code, through a telco partner or aggregator.</li>
+<li><strong>Audio summaries</strong> for low-literacy users
+(text-to-speech in local languages).</li>
+<li>Accessible design: large tap targets, screen-reader labels,
+colour-blind-safe bars (never only red/green, always with a number and
+an icon too).</li>
+</ul>
+<h2 id="65-official-accounts-for-politicians">6.5 Official accounts (for
+politicians)</h2>
+<ul>
+<li>Office holders, or their verified staff, can claim their profile
+after identity and office verification.</li>
+<li>They can <strong>post replies</strong> and <strong>submit
+evidence</strong> (documents, photos, coordinates). Evidence enters the
+same verification queue as everything else. It does not appear as fact
+until checked.</li>
+<li>They <strong>cannot</strong> delete items, hide comments, buy
+placement or change their score.</li>
+<li>Every reply is labelled "Response from the office of …".</li>
+</ul>
+<hr />
+<h1 id="7-data-sources-collection-and-verification">7. Data: sources,
+collection and verification</h1>
+<h2 id="71-data-sources">7.1 Data sources</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Sources</th>
+<th>How collected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Who holds office</td>
+<td>INEC results and certificates of return, NASS website, State
+Assembly sites, State Independent Electoral Commissions (SIECs) for LGA
+polls, government gazettes, news</td>
+<td>Researchers build the directory; crowdsourced corrections; quarterly
+audit</td>
+</tr>
+<tr class="even">
+<td>Legislative activity</td>
+<td>NASS Votes &amp; Proceedings, Order Papers, Hansards, bills
+database, OrderPaper (partner)</td>
+<td>Scraping public pages where permitted, PDF parsing,
+partnerships</td>
+</tr>
+<tr class="odd">
+<td>Budgets &amp; spending</td>
+<td>Budget Office of the Federation, Open Treasury portal, State budget
+documents, BudgIT (partner), Auditor-General reports</td>
+<td>PDF/Excel parsing, manual entry for states</td>
+</tr>
+<tr class="even">
+<td>Procurement / contracts</td>
+<td>Nigeria Open Contracting Portal (NOCOPO), BPP, state procurement
+portals</td>
+<td>API or scraping where permitted</td>
+</tr>
+<tr class="odd">
+<td>Projects</td>
+<td>Official announcements, news, BudgIT Tracka, citizen reports, FOI
+requests</td>
+<td>Pipeline in 7.2</td>
+</tr>
+<tr class="even">
+<td>News</td>
+<td>Licensed news APIs, publisher RSS feeds, partnerships with national
+and regional outlets, radio partners</td>
+<td>RSS/API ingestion. <strong>Summaries + links only, never full
+articles</strong></td>
+</tr>
+<tr class="odd">
+<td>Official social media</td>
+<td>Official X, Facebook, Instagram, YouTube accounts of governments and
+officials</td>
+<td>Official platform APIs within their terms (see 12.4)</td>
+</tr>
+<tr class="even">
+<td>Promises</td>
+<td>Campaign manifestos, inaugural speeches, debates, interviews</td>
+<td>Researchers extract and log with source</td>
+</tr>
+<tr class="odd">
+<td>Freedom of Information</td>
+<td>FOI Act 2011 requests to ministries, agencies, states</td>
+<td>Legal/research team; publish responses</td>
+</tr>
+</tbody>
+</table>
+<h2 id="72-the-news-to-official-pipeline">7.2 The news-to-official
+pipeline</h2>
+<pre><code>[Sources] → Ingest → Clean &amp; de-duplicate → AI classify &amp; extract
+         → Entity linking (which officials? which LGA? which project?)
+         → Claim type (announced / contract awarded / completed / disputed)
+         → Human editor review  ← required for anything that affects a score
+         → Publish to feed → Citizen reactions &amp; verification
+         → Score engine (nightly)</code></pre>
+<p><strong>Step details:</strong></p>
+<ol type="1">
+<li><strong>Ingest</strong> every 15 minutes from RSS, APIs and partner
+feeds. Store the URL, headline, publish time and outlet.</li>
+<li><strong>De-duplicate:</strong> ten outlets covering the same story
+become one item with ten source links. More sources = higher
+credibility.</li>
+<li><strong>AI classification</strong> (using a large language model
+such as Claude) suggests:
+<ul>
+<li>which officials and offices are involved,</li>
+<li>location (state, LGA, ward, GPS if possible),</li>
+<li>topic (roads, health…),</li>
+<li>claim type,</li>
+<li>a neutral 2–3 sentence summary in plain English, plus
+translations.</li>
+</ul></li>
+<li><strong>Human review.</strong> The AI only <em>suggests</em>. An
+editor confirms before the item can affect a score. Items that don't
+affect a score (general news) can auto-publish with a "summary
+auto-generated" label once accuracy is proven above 95% in testing.</li>
+<li><strong>Confidence labels</strong> on every item:
+<ul>
+<li>🟡 <strong>Announced:</strong> the official or government says
+it.</li>
+<li>🔵 <strong>Reported:</strong> independent media confirms it.</li>
+<li>🟢 <strong>Verified on ground:</strong> POL field researcher,
+partner or ≥3 trusted citizen photos confirm it.</li>
+<li>🔴 <strong>Disputed:</strong> credible evidence contradicts the
+claim.</li>
+</ul></li>
+<li><strong>Attribution rules.</strong> Credit for a project goes to the
+office that funded and delivered it. Example: a federal road in Kano is
+credited to the Federal Ministry of Works and the President, not the
+governor, unless the state co-funded it. These rules are written down in
+the editorial handbook (10.3).</li>
+</ol>
+<h2 id="73-citizen-project-verification">7.3 Citizen project
+verification</h2>
+<ul>
+<li>A user submits a photo. The app captures GPS and timestamp
+<strong>from the device at the moment of capture</strong>, and gallery
+uploads are refused for verification. Photos are checked against the
+project location (within a set radius).</li>
+<li><strong>Trust levels:</strong> a new user's report counts a little;
+users whose past reports were confirmed get more weight ("trusted
+verifier" badge).</li>
+<li>Image checks: reverse-image search for reused photos, metadata
+check, AI-generated image detection.</li>
+<li><strong>Status changes</strong> require either ≥3 independent
+trusted reports or one POL field verification.</li>
+<li><strong>Safety:</strong> users can submit anonymously, faces are
+blurred automatically, exact GPS is never shown publicly (only to
+roughly 100 m), and the app warns users never to take risks to get a
+photo.</li>
+</ul>
+<h2 id="74-field-network">7.4 Field network</h2>
+<ul>
+<li><strong>State fellows:</strong> one paid part-time researcher per
+state (start with the pilot state), often a journalism or political
+science graduate.</li>
+<li><strong>Partner networks:</strong> universities, NYSC corps members
+(as volunteers in their own time, outside official duties), community
+radio, local CSOs.</li>
+<li>Each fellow verifies priority projects monthly and keeps the local
+directory up to date.</li>
+</ul>
+<h2 id="75-the-data-gap-at-lga-and-ward-level-and-how-to-close-it">7.5
+The data gap at LGA and ward level, and how to close it</h2>
+<p>This is the hardest part of the project. Plan for it:</p>
+<ol type="1">
+<li>Start with <strong>one pilot state</strong> and do it
+thoroughly.</li>
+<li>Send <strong>FOI requests</strong> to each LGA for budgets and
+project lists. Publish when they respond, and also publish when they
+don't ("LGA X has not responded to a request sent 60 days ago" is itself
+information).</li>
+<li>Use <strong>SIEC results</strong> and local news for who holds
+office.</li>
+<li><strong>Crowdsource the directory</strong> with moderation: "Is this
+your councillor? Suggest a correction."</li>
+<li>Mark scores clearly as <strong>"Insufficient data"</strong> rather
+than guessing. An empty score is honest; a fake one destroys trust.</li>
+</ol>
+<hr />
+<h1 id="8-the-scoring-method">8. The scoring method</h1>
+<h2 id="81-design-rules">8.1 Design rules</h2>
+<ol type="1">
+<li>Facts and opinion are <strong>always separate</strong>.</li>
+<li>Every score shows <strong>how much data</strong> it rests on (a
+confidence level).</li>
+<li>Officials are compared only with <strong>others holding the same
+type of office</strong>. A councillor is never ranked against a
+governor.</li>
+<li>Score is <strong>relative to the time served</strong> ("since they
+took office").</li>
+<li>The method is <strong>public and versioned</strong> (v1.0, v1.1, …)
+with a changelog.</li>
+<li>An independent <strong>Methodology Advisory Panel</strong>
+(academics, statisticians, CSOs, a lawyer) reviews it every year.</li>
+</ol>
+<h2 id="82-performance-score-0100">8.2 Performance Score (0–100)</h2>
+<p>Built from components that depend on the type of office:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Executive (President, Governor, LGA Chair)</th>
+<th>Legislator (Senator, Rep, State Assembly)</th>
+<th>Councillor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Projects delivered &amp; verified</td>
+<td>30%</td>
+<td>15% (constituency projects)</td>
+<td>35%</td>
+</tr>
+<tr class="even">
+<td>Budget performance &amp; transparency</td>
+<td>20%</td>
+<td>10%</td>
+<td>15%</td>
+</tr>
+<tr class="odd">
+<td>Promises kept</td>
+<td>20%</td>
+<td>15%</td>
+<td>15%</td>
+</tr>
+<tr class="even">
+<td>Legislative work (bills, motions, quality)</td>
+<td>—</td>
+<td>25%</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Attendance &amp; participation</td>
+<td>—</td>
+<td>15%</td>
+<td>10%</td>
+</tr>
+<tr class="even">
+<td>Outcome indicators (health, education, security data from
+official/independent sources)</td>
+<td>15%</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Transparency &amp; accountability (publishes budgets, answers FOI,
+audit findings)</td>
+<td>15%</td>
+<td>10%</td>
+<td>15%</td>
+</tr>
+<tr class="even">
+<td>Constituency engagement (town halls, accessible office)</td>
+<td>—</td>
+<td>10%</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[These weights are a starting proposal. The Advisory Panel
+must review them before launch.]</strong></p>
+<p><strong>Project points example:</strong></p>
+<ul>
+<li>Each project gets points based on <strong>value tier</strong> (size
+of budget) × <strong>status</strong> × <strong>verification
+level</strong>.</li>
+<li>Status multipliers: completed and working 1.0; completed, not
+working 0.4; ongoing on schedule 0.5; stalled 0.1; abandoned −0.3; never
+started (but money released) −0.6.</li>
+<li>Verification multipliers: verified on ground 1.0; reported by
+independent media 0.7; announced only 0.3; disputed 0.</li>
+<li>Points are normalised against the <strong>median of peers</strong>
+in the same office type, so a component score of 50 means "average for
+this office".</li>
+</ul>
+<p><strong>Confidence label:</strong> High / Medium / Low / Insufficient
+data, based on the number of verified data points. With "Insufficient
+data", the number is hidden and only the raw record is shown.</p>
+<h2 id="83-citizen-approval-bar">8.3 Citizen Approval bar</h2>
+<p>Shown as a horizontal bar: <strong>% approve vs %
+disapprove</strong>, with the number of verified residents beneath
+it.</p>
+<p><strong>Weighting:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Who reacted</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Verified resident of the official's constituency</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>Verified Nigerian, not a resident of that constituency</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>Unverified account</td>
+<td>0 (shown separately as "unverified reactions", never counted)</td>
+</tr>
+<tr class="even">
+<td>Account flagged for coordinated behaviour</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Further protections:</strong></p>
+<ul>
+<li><strong>One active rating per user per official</strong>, which they
+can change at any time. Reactions on individual news items roll up into
+this rating rather than adding up endlessly. This stops someone from
+reacting 500 times on 500 items.</li>
+<li><strong>Time decay:</strong> recent reactions count more (e.g. a
+12-month half-life), so the bar reflects current opinion.</li>
+<li><strong>Smoothing for small numbers:</strong> with few reactions,
+the bar is pulled toward 50/50 and greyed out until there are at least
+~100 verified residents.</li>
+<li><strong>Brigading detection:</strong> sudden spikes from new
+accounts, many accounts sharing devices or IP ranges, or identical
+comment text are automatically down-weighted and reviewed.</li>
+<li>The bar is <strong>never</strong> merged into the Performance Score.
+They are displayed side by side. The gap between the two is itself
+interesting ("high approval, low delivery" or the reverse).</li>
+</ul>
+<h2 id="84-worked-example-illustrative-only">8.4 Worked example
+(illustrative only)</h2>
+<blockquote>
+<p><em>Hon. A. B. (fictional), LGA Chairman, sample LGA, 18 months in
+office.</em></p>
+<ul>
+<li>Projects: 6 logged. 2 verified completed and working, 1 ongoing, 2
+announced only, 1 abandoned → component 41/100</li>
+<li>Budget: budget published, 48% capital implementation → 55/100</li>
+<li>Promises: 12 tracked. 3 kept, 4 in progress, 5 not started →
+38/100</li>
+<li>Outcomes: insufficient data → weight redistributed to the other
+components</li>
+<li>Transparency: answered 1 of 3 FOI requests → 33/100</li>
+</ul>
+<p><strong>Performance Score: 43/100 · Confidence: Medium</strong>
+<strong>Citizen Approval: 36% approve / 64% disapprove (1,240 verified
+residents)</strong></p>
+</blockquote>
+<h2 id="85-score-governance">8.5 Score governance</h2>
+<ul>
+<li>The score engine runs nightly. Every change is logged with its
+reason.</li>
+<li>An official can <strong>appeal</strong> a score component through a
+formal process with a 14-day response time. Outcomes are published.</li>
+<li>An annual <strong>independent audit</strong> of the method and a
+sample of scores, done by a university or statistics partner.</li>
+</ul>
+<hr />
+<h1 id="9-technology">9. Technology</h1>
+<h2 id="91-recommended-stack">9.1 Recommended stack</h2>
+<p>The goal is low cost, quick to build, easy to hire for in
+Nigeria.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Recommendation</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mobile app</td>
+<td>React Native (Expo), Android first</td>
+<td>One codebase for Android &amp; iOS; strong Nigerian developer
+pool</td>
+</tr>
+<tr class="even">
+<td>Web</td>
+<td>Next.js (server-rendered for SEO), Lite mode</td>
+<td>Search traffic is a main source of free visitors</td>
+</tr>
+<tr class="odd">
+<td>API</td>
+<td>Node.js (NestJS) or Python (FastAPI)</td>
+<td>Common skills; good libraries</td>
+</tr>
+<tr class="even">
+<td>Database</td>
+<td>PostgreSQL + PostGIS (maps)</td>
+<td>Reliable, handles location queries</td>
+</tr>
+<tr class="odd">
+<td>Search</td>
+<td>OpenSearch / Meilisearch</td>
+<td>Fast search of officials and news</td>
+</tr>
+<tr class="even">
+<td>Cache &amp; queues</td>
+<td>Redis + a job queue (BullMQ / Celery)</td>
+<td>Ingestion, scoring jobs</td>
+</tr>
+<tr class="odd">
+<td>Data pipeline</td>
+<td>Python (scrapers, PDF parsing, scheduled jobs)</td>
+<td>Best tools for document parsing</td>
+</tr>
+<tr class="even">
+<td>AI</td>
+<td>A large language model API (e.g. Claude) for classification,
+extraction, summaries, translation; vision models for image checks</td>
+<td>Speed. Always with human review</td>
+</tr>
+<tr class="odd">
+<td>File storage</td>
+<td>S3-compatible object storage + CDN</td>
+<td>Photos, documents</td>
+</tr>
+<tr class="even">
+<td>Hosting</td>
+<td>AWS (Cape Town / Lagos edge), Google Cloud, or a Nigerian-hosted
+provider for data held in Nigeria</td>
+<td>See 11.2 on data protection</td>
+</tr>
+<tr class="odd">
+<td>Security edge</td>
+<td>Cloudflare (or similar) for CDN, DDoS protection, bot management,
+WAF</td>
+<td>Political sites are frequent DDoS targets</td>
+</tr>
+<tr class="even">
+<td>Identity verification</td>
+<td>Licensed Nigerian KYC providers for phone/NIN checks (e.g. Smile ID,
+Prembly, Dojah, VerifyMe; <strong>[verify]</strong>)</td>
+<td>Never handle raw NIN data yourself if avoidable</td>
+</tr>
+<tr class="odd">
+<td>Messaging</td>
+<td>WhatsApp Business Platform, SMS aggregator, email (e.g. Amazon
+SES)</td>
+<td>Digests and alerts</td>
+</tr>
+<tr class="even">
+<td>Analytics</td>
+<td>Privacy-respecting product analytics (e.g. PostHog self-hosted)</td>
+<td>No selling of user data</td>
+</tr>
+<tr class="odd">
+<td>Monitoring</td>
+<td>Sentry, uptime monitoring, log alerts</td>
+<td>Reliability during traffic spikes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="92-core-data-model-simplified">9.2 Core data model
+(simplified)</h2>
+<pre><code>Geography:   State → LGA → Ward → PollingUnit
+             SenatorialDistrict, FederalConstituency, StateConstituency (map to LGAs/wards)
+
+Office       (id, type, level, geography_id, title)
+Person       (id, name, photo, bio, party_history, education, public_assets_declared?)
+Tenure       (person_id, office_id, start_date, end_date, how_obtained: elected/appointed/court)
+Promise      (tenure_id, text, source_url, date_made, category, status, status_history)
+Project      (id, title, location_geo, budget_amount, funding_source, contractor,
+              responsible_tenure_ids[], status, status_history, verification_level)
+NewsItem     (id, summary, sources[], published_at, topic, claim_type,
+              linked_tenures[], linked_projects[], confidence_label, editor_id)
+Bill / Vote / Attendance  (for legislators)
+Reaction     (user_id, target_type, target_id, type, created_at, weight_snapshot)
+OfficialRating (user_id, tenure_id, value, updated_at)  ← one per user per official
+CitizenReport (user_id, project_id, photo, gps, captured_at, status_claim, trust_score, review_status)
+Score        (tenure_id, method_version, component_scores{}, total, confidence, computed_at)
+User         (id, phone_hash, verification_level, home_ward_id, language, trust_score)
+Reply        (tenure_id, target_id, text, evidence[], verified_official_account_id)
+AuditLog     (who, what, before, after, when)</code></pre>
+<h2 id="93-key-engineering-requirements">9.3 Key engineering
+requirements</h2>
+<ul>
+<li><strong>Everything traceable:</strong> every number on screen can be
+traced to its sources and the method version.</li>
+<li><strong>Audit log</strong> of every editorial and score change, kept
+permanently.</li>
+<li><strong>Rate limits &amp; anti-bot:</strong> device fingerprinting,
+phone verification, CAPTCHA on suspicious behaviour, velocity
+checks.</li>
+<li><strong>Election-night scale:</strong> load-test for 50× normal
+traffic; cache aggressively; degrade gracefully (read-only mode).</li>
+<li><strong>Offline-tolerant app:</strong> queue reactions and reports
+when offline.</li>
+<li><strong>Accessibility &amp; localisation</strong> built in from day
+one (all strings translatable).</li>
+<li><strong>Security:</strong> encryption in transit and at rest;
+least-privilege access for staff; two-factor login for all staff;
+regular penetration tests; bug bounty later.</li>
+<li><strong>Backups:</strong> daily, tested restores, a copy held in a
+second region.</li>
+<li><strong>Censorship resilience:</strong> a mirror domain plan and the
+ability to keep serving content if a domain is blocked (see risk
+R-04).</li>
+</ul>
+<h2 id="94-ai-use-rules">9.4 AI use: rules</h2>
+<ol type="1">
+<li>AI suggests, humans decide anything that affects a score or names a
+wrongdoing.</li>
+<li>All AI summaries are labelled.</li>
+<li>Monthly accuracy sampling: an editor re-checks a random 5% of AI
+output. Pause automation if accuracy drops below the threshold.</li>
+<li>Never use AI to generate images or video of real officials.</li>
+<li>Prompt and model changes are logged, like method changes.</li>
+</ol>
+<hr />
+<h1 id="10-content-editorial-and-moderation">10. Content, editorial and
+moderation</h1>
+<h2 id="101-editorial-team-initial">10.1 Editorial team (initial)</h2>
+<ul>
+<li><strong>Editor-in-chief:</strong> final responsibility, experienced
+journalist, publicly named.</li>
+<li><strong>Data editors (2–3):</strong> review pipeline items and
+projects.</li>
+<li><strong>Researchers/fellows:</strong> directory, promises, field
+checks.</li>
+<li><strong>Community moderators (2+, rotating, covering all major
+languages):</strong> comments and reports.</li>
+</ul>
+<h2 id="102-moderation-rules-for-comments">10.2 Moderation rules for
+comments</h2>
+<ul>
+<li><strong>Allowed:</strong> criticism and praise of officials' public
+conduct, strong opinion, evidence.</li>
+<li><strong>Removed:</strong> hate speech (ethnic, religious, gender),
+threats or incitement to violence, unproven accusations of crimes
+against named individuals, doxxing (addresses, family members), spam,
+coordinated campaigns, fake news.</li>
+<li><strong>Tools:</strong> AI pre-screening in all supported languages,
+user reporting, a three-strikes system, and shadow-limiting of
+coordinated accounts.</li>
+<li><strong>Election period:</strong> stricter thresholds, faster
+response targets (under 1 hour for violence-related reports), and a
+direct line to fact-check partners.</li>
+</ul>
+<h2 id="103-editorial-handbook-write-before-launch">10.3 Editorial
+handbook (write before launch)</h2>
+<p>Covers: the attribution rules, how to write neutral summaries, which
+words to avoid ("corrupt" is only used with a court judgment), how to
+handle disputed claims, the right-of-reply process (contact the office
+and wait 48 hours before publishing serious allegations), corrections
+policy, conflict-of-interest declarations for staff, election-period
+rules, and safety protocol for field staff.</p>
+<h2 id="104-balance-monitoring">10.4 Balance monitoring</h2>
+<p>Every month, publish a <strong>balance report</strong>: share of
+positive and negative items by party, region, gender and office level.
+If one party's officials get consistently harsher coverage, investigate
+whether that reflects the data or a bias in sourcing.</p>
+<hr />
+<h1 id="11-legal-and-regulatory-framework">11. Legal and regulatory
+framework</h1>
+<blockquote>
+<p><strong>Hire a Nigerian media and technology lawyer before
+launch.</strong> This section lists issues to discuss with them. It is
+not legal advice.</p>
+</blockquote>
+<h2 id="111-company-setup">11.1 Company setup</h2>
+<ul>
+<li>Register with the <strong>Corporate Affairs Commission
+(CAC)</strong>. Recommended structure:
+<ul>
+<li><strong>POL Technologies Ltd</strong> (company limited by shares):
+runs the app, ads and Pro subscriptions, and can raise investment.</li>
+<li>Later, <strong>POL Foundation</strong> (company limited by guarantee
+/ incorporated trustees): receives grants, owns the methodology and
+editorial independence, and sits on the Ltd's board or holds a "golden
+share" over editorial policy. Many funders can only give to
+non-profits.</li>
+</ul></li>
+<li>Tax registration (FIRS, state IRS), and VAT on subscriptions and
+ads.</li>
+<li>Register the <strong>trademark</strong> for the name and logo.</li>
+<li>Shareholder agreement with an <strong>editorial independence
+clause</strong>: investors cannot direct content or scores.</li>
+<li>Funding transparency: publish all funders above a threshold on the
+website.</li>
+</ul>
+<h2 id="112-data-protection-nigeria-data-protection-act-2023-ndpa">11.2
+Data protection: Nigeria Data Protection Act 2023 (NDPA)</h2>
+<ul>
+<li>Register with and follow guidance from the <strong>Nigeria Data
+Protection Commission (NDPC)</strong>; appoint a Data Protection
+Officer; carry out data protection audits as required <strong>[verify
+current thresholds]</strong>.</li>
+<li>Political opinion is <strong>sensitive personal data</strong>. How
+each user reacts to politicians must be protected strictly:
+<ul>
+<li>Store reactions linked to pseudonymous IDs.</li>
+<li>Never publish who reacted how.</li>
+<li>Never sell or share individual reaction data, only aggregated
+statistics.</li>
+<li>Publish aggregates only when groups are large enough that no one can
+be identified.</li>
+</ul></li>
+<li>Phone and NIN verification: use licensed KYC providers, store only a
+verification flag and a hashed phone number, never the NIN itself.</li>
+<li>Clear consent screens, a privacy policy in plain language and in
+local languages, and easy account deletion.</li>
+<li>Data held outside Nigeria: check cross-border transfer rules under
+the NDPA.</li>
+</ul>
+<h2 id="113-defamation-and-publication-risk">11.3 Defamation and
+publication risk</h2>
+<ul>
+<li>Defamation can bring civil suits, and criminal defamation provisions
+also exist in Nigerian law <strong>[verify with counsel]</strong>.
+Politicians are known to sue and to petition the police.</li>
+<li><strong>Protections:</strong>
+<ul>
+<li>Fact-based claims with sources; truth (justification) and fair
+comment on matters of public interest are the main defences.</li>
+<li>Right-of-reply procedure, documented every time.</li>
+<li>The "Disputed" label rather than stating claims as false without
+evidence.</li>
+<li>Never call anyone corrupt or criminal without a court judgment or
+official finding (e.g. an Auditor-General query is reported as exactly
+that: a query).</li>
+<li>Pre-publication legal review for high-risk items.</li>
+<li>Comment moderation (POL can be exposed for user comments it hosts
+and fails to remove after notice).</li>
+<li><strong>Media liability insurance</strong> if obtainable
+<strong>[verify availability in Nigeria]</strong>.</li>
+<li>A legal defence fund and a relationship with press freedom
+organisations (e.g. Media Rights Agenda).</li>
+</ul></li>
+</ul>
+<h2 id="114-cybercrimes-act-2015-as-amended-2024">11.4 Cybercrimes Act
+2015 (as amended 2024)</h2>
+<ul>
+<li>Its provisions on cyberstalking and false information have been used
+against journalists and online critics <strong>[verify the current
+wording after the 2024 amendment]</strong>.</li>
+<li><strong>Mitigation:</strong> strict sourcing, no publishing of
+unverified allegations, fast takedown of harmful user comments, legal
+counsel on retainer, and documented editorial processes to show good
+faith.</li>
+<li>Prepare a <strong>police / DSS contact protocol</strong>: what staff
+do if invited for questioning (call counsel, never go alone, inform
+press freedom partners).</li>
+</ul>
+<h2 id="115-electoral-law">11.5 Electoral law</h2>
+<ul>
+<li><strong>Electoral Act 2022:</strong> respect the official campaign
+window and the ban on campaigning in the last 24 hours before polls
+<strong>[verify]</strong>. POL is not campaigning, but avoid any "vote
+for X" language.</li>
+<li><strong>Never present citizen approval as an opinion poll or
+election prediction.</strong> Label it "Citizen Approval among POL
+users". It is not a scientific sample.</li>
+<li>Election-day content: only official INEC results (IReV) and
+accredited observer data (e.g. Yiaga Africa). No unofficial result
+tallies.</li>
+<li>Don't publish anything resembling a result before INEC announces
+it.</li>
+</ul>
+<h2 id="116-copyright-copyright-act-2022">11.6 Copyright: Copyright Act
+2022</h2>
+<ul>
+<li>Never republish full articles or photos without a licence.</li>
+<li>Use <strong>short headlines, your own summaries, and links</strong>
+to the original.</li>
+<li>Seek <strong>content partnerships</strong> with publishers. POL
+sends them traffic, which is attractive to them.</li>
+<li>Officials' photos: use official government photos (check licence),
+take your own at public events, or get permission.</li>
+</ul>
+<h2 id="117-other-regulators-and-rules">11.7 Other regulators and
+rules</h2>
+<ul>
+<li><strong>NITDA</strong> (IT and digital rules, including the code of
+practice for online platforms <strong>[verify current
+status]</strong>).</li>
+<li><strong>NCC</strong> for SMS/USSD services through licensed
+aggregators.</li>
+<li><strong>ARCON</strong> (Advertising Regulatory Council of Nigeria)
+on advertising rules, including political adverts
+<strong>[verify]</strong>.</li>
+<li><strong>Consumer protection (FCCPC)</strong> for subscriptions.</li>
+<li>Platform rules: Google Play and Apple App Store policies on news and
+political content; WhatsApp Business policy.</li>
+</ul>
+<h2 id="118-freedom-of-information-act-2011">11.8 Freedom of Information
+Act 2011</h2>
+<p>A legal tool for getting data. Build a routine FOI programme and
+publish every request and every response (or non-response).</p>
+<hr />
+<h1 id="12-risk-register">12. Risk register</h1>
+<p><strong>L</strong> = likelihood, <strong>I</strong> = impact
+(H/M/L).</p>
+<h2 id="121-trust-and-integrity-risks">12.1 Trust and integrity
+risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-01</td>
+<td><strong>Bots and paid online teams manipulate
+reactions</strong></td>
+<td>H</td>
+<td>H</td>
+<td>Phone/ID verification; resident weighting; one rating per user per
+official; anomaly detection; unverified reactions shown separately;
+Performance Score not affected by reactions</td>
+</tr>
+<tr class="even">
+<td>R-02</td>
+<td><strong>Party, ethnic or religious bloc voting</strong> distorts
+approval</td>
+<td>H</td>
+<td>M</td>
+<td>Approval separated from Performance; residents weighted most;
+display sample size; explain clearly that approval is opinion</td>
+</tr>
+<tr class="odd">
+<td>R-03</td>
+<td><strong>POL is seen as biased</strong> toward a party or region</td>
+<td>M</td>
+<td>H</td>
+<td>Published principles and method; monthly balance reports; diverse
+team and advisory panel; public funder list; same rules for all</td>
+</tr>
+<tr class="even">
+<td>R-05</td>
+<td><strong>Officials publish fake project claims</strong> (PR as
+news)</td>
+<td>H</td>
+<td>H</td>
+<td>Confidence labels; "Announced" scores low; ground verification
+needed for full points; "Disputed" workflow</td>
+</tr>
+<tr class="odd">
+<td>R-06</td>
+<td><strong>AI misattributes a story</strong> to the wrong official</td>
+<td>M</td>
+<td>H</td>
+<td>Human review for anything that affects a score; accuracy sampling;
+fast correction process</td>
+</tr>
+<tr class="even">
+<td>R-07</td>
+<td><strong>Factual error</strong> goes viral</td>
+<td>M</td>
+<td>H</td>
+<td>Corrections policy; visible correction notes; social posts corrected
+with a reply/quote</td>
+</tr>
+<tr class="odd">
+<td>R-08</td>
+<td><strong>Fake citizen photos</strong> (old images, other locations,
+AI-generated)</td>
+<td>M</td>
+<td>M</td>
+<td>In-app camera capture only; GPS/time checks; reverse-image search;
+trusted-verifier system; multiple confirmations required</td>
+</tr>
+<tr class="even">
+<td>R-09</td>
+<td><strong>Funder or investor tries to influence content</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Editorial independence clause; foundation oversight; funder
+diversity; refuse conditional money; public funder list</td>
+</tr>
+<tr class="odd">
+<td>R-10</td>
+<td><strong>Insufficient local data</strong> leads to empty or wrong
+local scores</td>
+<td>H</td>
+<td>M</td>
+<td>Pilot state first; FOI programme; fellows; "Insufficient data" label
+instead of guessing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="122-legal-and-political-risks">12.2 Legal and political
+risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-04</td>
+<td><strong>Government blocks the site/app</strong> or pressures
+platforms (as with the 2021 Twitter suspension)</td>
+<td>L–M</td>
+<td>H</td>
+<td>Strict neutrality and legality; mirror domains; WhatsApp/SMS reach;
+international press freedom allies; content safe to defend in court</td>
+</tr>
+<tr class="even">
+<td>R-11</td>
+<td><strong>Defamation lawsuits</strong></td>
+<td>H</td>
+<td>M–H</td>
+<td>Sourcing, right of reply, legal review, insurance, legal fund
+(11.3)</td>
+</tr>
+<tr class="odd">
+<td>R-12</td>
+<td><strong>Arrest or harassment of staff</strong> under cybercrime or
+other laws</td>
+<td>M</td>
+<td>H</td>
+<td>Legal retainer; police contact protocol; press freedom partners; key
+staff known publicly (visibility protects them); legal entity and
+editor, not individual fellows, carry responsibility</td>
+</tr>
+<tr class="even">
+<td>R-13</td>
+<td><strong>Physical threats to field researchers or citizen
+verifiers</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Anonymous reporting; no faces/exact GPS published; safety training;
+no field work in high-risk areas during tense periods; insurance</td>
+</tr>
+<tr class="odd">
+<td>R-14</td>
+<td><strong>Data protection breach or NDPA violation</strong></td>
+<td>M</td>
+<td>H</td>
+<td>DPO; NDPA compliance programme; minimum data collection; encryption;
+breach response plan</td>
+</tr>
+<tr class="even">
+<td>R-15</td>
+<td><strong>Electoral law breach</strong> (seen as campaigning or
+publishing "polls")</td>
+<td>L</td>
+<td>H</td>
+<td>Clear labelling; election-period editorial rules; counsel
+review</td>
+</tr>
+<tr class="odd">
+<td>R-16</td>
+<td><strong>Copyright claims from publishers</strong></td>
+<td>M</td>
+<td>M</td>
+<td>Summaries + links only; licensing partnerships</td>
+</tr>
+<tr class="even">
+<td>R-17</td>
+<td><strong>App store removal</strong> after complaints</td>
+<td>L</td>
+<td>H</td>
+<td>Comply with store news/political content policies; strong
+moderation; web and WhatsApp as fallbacks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="123-security-risks">12.3 Security risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-18</td>
+<td><strong>DDoS attacks</strong> around elections or after critical
+stories</td>
+<td>H</td>
+<td>M</td>
+<td>Cloudflare/CDN, rate limiting, caching, read-only fallback mode</td>
+</tr>
+<tr class="even">
+<td>R-19</td>
+<td><strong>Hacking / defacement / score tampering</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Security reviews; 2FA; least-privilege; audit logs; scores can be
+recomputed from source data; pen tests</td>
+</tr>
+<tr class="odd">
+<td>R-20</td>
+<td><strong>Users' political views exposed</strong> (leak,
+subpoena)</td>
+<td>L</td>
+<td>H</td>
+<td>Pseudonymous storage, minimum retention, encryption, legal process
+policy, transparency report</td>
+</tr>
+<tr class="even">
+<td>R-21</td>
+<td><strong>Impersonation:</strong> fake "POL" accounts posting fake
+scores</td>
+<td>M</td>
+<td>M</td>
+<td>Verified handles on all platforms; scorecard images with QR code
+linking to the live page; report fakes quickly</td>
+</tr>
+<tr class="odd">
+<td>R-22</td>
+<td><strong>Deepfakes about officials</strong> spread on the feed</td>
+<td>M</td>
+<td>H</td>
+<td>No user-generated media in the feed; fact-check partners;
+AI-detection tools for submissions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="124-platform-and-data-supply-risks">12.4 Platform and data
+supply risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-23</td>
+<td><strong>Social platform API changes or costs</strong> (X/Meta)</td>
+<td>H</td>
+<td>M</td>
+<td>Don't depend on one source; RSS, publisher partnerships and official
+websites; budget for paid API tiers <strong>[verify current
+pricing]</strong></td>
+</tr>
+<tr class="even">
+<td>R-24</td>
+<td><strong>Scraping blocked or prohibited</strong></td>
+<td>M</td>
+<td>M</td>
+<td>Respect robots.txt and terms; prefer partnerships and FOI; data
+agreements</td>
+</tr>
+<tr class="odd">
+<td>R-25</td>
+<td><strong>Internet shutdowns or poor connectivity</strong></td>
+<td>M</td>
+<td>M</td>
+<td>Offline caching; SMS/USSD; radio partnerships</td>
+</tr>
+</tbody>
+</table>
+<h2 id="125-business-risks">12.5 Business risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-26</td>
+<td><strong>Advertisers avoid political content</strong> (brand
+safety)</td>
+<td>H</td>
+<td>M</td>
+<td>Contextual ads on non-controversial pages; sponsored voter
+education; diversify into Pro, licensing, grants</td>
+</tr>
+<tr class="even">
+<td>R-27</td>
+<td><strong>Low Nigerian ad rates (CPM)</strong> mean little revenue
+from traffic</td>
+<td>H</td>
+<td>M</td>
+<td>Traffic monetisation is only one stream; focus on Pro data and media
+licensing</td>
+</tr>
+<tr class="odd">
+<td>R-28</td>
+<td><strong>Traffic spikes only at elections</strong>, then drops</td>
+<td>H</td>
+<td>M</td>
+<td>Day-to-day value: local news, "my leaders", project alerts, weekly
+digests, fiscal-year stories (budget season, allocations)</td>
+</tr>
+<tr class="even">
+<td>R-29</td>
+<td><strong>Running out of money</strong> before revenue</td>
+<td>M</td>
+<td>H</td>
+<td>Lean team; grant pipeline early; phased spending; 6 months of cash
+reserve</td>
+</tr>
+<tr class="odd">
+<td>R-30</td>
+<td><strong>Naira exchange-rate swings</strong> raise costs (cloud, APIs
+priced in USD)</td>
+<td>H</td>
+<td>M</td>
+<td>Price some Pro deals in USD; keep USD reserves; optimise cloud
+costs</td>
+</tr>
+<tr class="even">
+<td>R-31</td>
+<td><strong>Copycat competitor</strong> or politically funded fake
+"scorecard" apps</td>
+<td>M</td>
+<td>M</td>
+<td>Move fast; credibility through partnerships and method; brand; data
+depth over time</td>
+</tr>
+<tr class="odd">
+<td>R-32</td>
+<td><strong>Founder burnout / key-person risk</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Hire an editor-in-chief and tech lead early; document everything;
+board/advisers</td>
+</tr>
+<tr class="even">
+<td>R-33</td>
+<td><strong>Low engagement / users don't come back</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Location personalisation; notifications; WhatsApp digests; local
+news focus; game-like verifier badges</td>
+</tr>
+</tbody>
+</table>
+<h2 id="126-social-harm-risks">12.6 Social harm risks</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Risk</th>
+<th>L</th>
+<th>I</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-34</td>
+<td><strong>Comments fuel ethnic or religious hatred</strong></td>
+<td>M</td>
+<td>H</td>
+<td>Strong moderation in all languages; AI pre-screening; comment-free
+mode for sensitive items; election-period strictness</td>
+</tr>
+<tr class="even">
+<td>R-35</td>
+<td><strong>Scores used to justify violence or harassment</strong>
+against officials</td>
+<td>L</td>
+<td>H</td>
+<td>No personal info beyond public office; condemn violence publicly;
+remove calls to harm immediately; cooperate lawfully with
+authorities</td>
+</tr>
+<tr class="odd">
+<td>R-36</td>
+<td><strong>Exclusion</strong> of rural, older, poorer and low-literacy
+citizens</td>
+<td>H</td>
+<td>M</td>
+<td>WhatsApp, SMS, audio, local languages, radio partnerships, community
+ambassadors</td>
+</tr>
+<tr class="even">
+<td>R-37</td>
+<td><strong>Unfair to women and minority officials</strong> (more abuse,
+less coverage)</td>
+<td>M</td>
+<td>M</td>
+<td>Balance monitoring; harassment moderation; ensure their work is
+covered equally</td>
+</tr>
+</tbody>
+</table>
+<h2 id="127-crisis-playbook-prepare-before-launch">12.7 Crisis playbook
+(prepare before launch)</h2>
+<p>For each scenario, write down the owner, the first-hour actions and
+the communication template:</p>
+<ol type="1">
+<li>Major factual error goes viral.</li>
+<li>Lawsuit or police invitation.</li>
+<li>Site/app blocked or DDoS.</li>
+<li>Data breach.</li>
+<li>Staff member threatened.</li>
+<li>Accusation of bias by a major party.</li>
+<li>Fake POL account spreading false scores.</li>
+</ol>
+<hr />
+<h1 id="13-brand-distribution-and-social-media-handles">13. Brand,
+distribution and social media handles</h1>
+<h2 id="131-name-and-brand">13.1 Name and brand</h2>
+<ul>
+<li>Check that the name is available at CAC, as a trademark, as domains
+(<code>.ng</code>, <code>.com.ng</code>, <code>.com</code>) and as
+handles on every platform before committing.</li>
+<li>Neutral colours. <strong>Avoid party colours</strong> (APC, PDP, LP,
+NNPP and other party branding) in the logo and main palette.</li>
+<li>Tagline ideas: "Vote the record." · "Facts, not hearsay." · "Know
+your leaders."</li>
+</ul>
+<h2 id="132-the-pol-social-handles">13.2 The POL social handles</h2>
+<p>These do two jobs: they inform people who never install the app, and
+they drive traffic and revenue.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>Content</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>Scorecard cards, "promise kept/broken" posts, threads, live election
+coverage (official data only)</td>
+<td>Daily, several posts</td>
+</tr>
+<tr class="even">
+<td>Facebook</td>
+<td>Same cards plus longer explainers; state-level pages later</td>
+<td>Daily</td>
+</tr>
+<tr class="odd">
+<td>Instagram</td>
+<td>Carousel scorecards, Reels</td>
+<td>4–7 / week</td>
+</tr>
+<tr class="even">
+<td>TikTok &amp; YouTube Shorts</td>
+<td>30–60s "Did your governor deliver?" explainers; field verification
+videos</td>
+<td>3–5 / week</td>
+</tr>
+<tr class="odd">
+<td>YouTube (long form)</td>
+<td>Monthly state reviews, candidate record breakdowns, interviews</td>
+<td>Weekly–monthly</td>
+</tr>
+<tr class="even">
+<td>WhatsApp Channel(s)</td>
+<td>National + one per state: weekly digest, alerts</td>
+<td>Weekly + breaking</td>
+</tr>
+<tr class="odd">
+<td>Telegram (optional)</td>
+<td>Mirror of WhatsApp</td>
+<td>Weekly</td>
+</tr>
+<tr class="even">
+<td>Radio partnerships</td>
+<td>Weekly "Scorecard" segment in local languages</td>
+<td>Weekly</td>
+</tr>
+</tbody>
+</table>
+<h2 id="133-automated-scorecard-posting-done-safely">13.3 Automated
+scorecard posting, done safely</h2>
+<p>The idea from your brief: a POL handle that automatically posts each
+person's score after analysis.</p>
+<ul>
+<li>The system <strong>generates scorecard images automatically</strong>
+from the latest scores: photo, office, Performance Score with
+confidence, Citizen Approval bar, top 3 facts, method version, date, and
+a <strong>QR code / link</strong> to the live page.</li>
+<li><strong>A human editor approves</strong> every post before it goes
+out. Auto-generate, human-approve. Never fully automatic, because one
+wrong automatic post about a governor can cause a lawsuit or a
+crisis.</li>
+<li>Post formats:
+<ul>
+<li>"Monthly Scorecard: Governors" (top 5 / bottom 5, with method
+link).</li>
+<li>"Promise Tracker update".</li>
+<li>"Project check: verified vs announced".</li>
+<li>"Most improved this quarter" (positive stories build trust with all
+sides).</li>
+<li>"Your LGA chairman this month" (state accounts).</li>
+</ul></li>
+<li><strong>Rule:</strong> every post links back to the website. That
+turns social reach into website traffic, and the website is where most
+ad and subscription revenue happens.</li>
+<li>Avoid low-confidence scores in rankings. Post only scores with
+Medium or High confidence.</li>
+</ul>
+<h2 id="134-growth-tactics">13.4 Growth tactics</h2>
+<ul>
+<li><strong>SEO:</strong> a server-rendered public page for every
+official, LGA and project. People search for "who is the chairman of X
+LGA", and POL should be the top result.</li>
+<li><strong>Shareable cards</strong> on every profile ("Share my
+councillor's scorecard").</li>
+<li><strong>Embeddable widgets</strong> for newspapers and blogs.</li>
+<li><strong>Partnerships:</strong> universities, student unions, NYSC
+CDS groups, faith-based and community groups (on a non-partisan basis),
+radio and TV.</li>
+<li><strong>Referral rewards:</strong> verifier badges, leaderboards for
+top verifiers (no cash, to avoid fraud).</li>
+<li><strong>Election-season moments:</strong> debate fact-checks,
+candidate comparison tools, "Before you vote" guides.</li>
+<li><strong>Influencer partnerships</strong> with clearly non-partisan
+creators. Disclose any paid partnership.</li>
+</ul>
+<hr />
+<h1 id="14-business-model-and-revenue">14. Business model and
+revenue</h1>
+<h2 id="141-revenue-principles">14.1 Revenue principles</h2>
+<ol type="1">
+<li><strong>Never sell</strong> score changes, removals, hidden content,
+"featured" placement for politicians, or user data.</li>
+<li><strong>No political adverts</strong> at least during the first
+year. After that, only if the board approves a strict policy (clearly
+labelled, equal terms for all parties, no micro-targeting, public ad
+library).</li>
+<li>Diversify. No single stream above 40% of revenue after year 2, so no
+single payer can pressure POL.</li>
+</ol>
+<h2 id="142-revenue-streams">14.2 Revenue streams</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Stream</th>
+<th>Who pays</th>
+<th>How</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>Display &amp; video advertising</strong></td>
+<td>Brands via ad networks (e.g. Google AdSense/Ad Manager) and direct
+sales</td>
+<td>Ads on website and app; contextual targeting by topic, not by user
+politics</td>
+<td>From launch (web)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>Social media monetisation</strong></td>
+<td>Platforms</td>
+<td>YouTube Partner Program, Facebook content monetisation, X creator
+revenue sharing, TikTok creator programmes <strong>[verify eligibility
+for Nigeria and thresholds]</strong></td>
+<td>After reaching thresholds</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Sponsored non-partisan content</strong></td>
+<td>Banks, telcos, FMCG brands' CSR budgets, NGOs, development
+partners</td>
+<td>Sponsored voter-education series, "Know your LGA" campaigns, clearly
+labelled</td>
+<td>Months 3+</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>POL Pro (data subscription)</strong></td>
+<td>Media houses, research firms, embassies, development agencies,
+banks, investors, consultancies, PR and risk firms</td>
+<td>Dashboards, bulk exports, alerts, API, historical data; tiered
+subscriptions</td>
+<td>Months 6+</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Media licensing</strong></td>
+<td>TV, radio and online news outlets</td>
+<td>Licensed scorecards and graphics for election coverage; data
+partnerships</td>
+<td>Election seasons + ongoing</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>Grants &amp; foundation funding</strong></td>
+<td>Democracy, governance and civic-tech funders (e.g. Ford Foundation,
+Open Society/OSIWA, NED, MacArthur, EU and UK/US governance programmes;
+<strong>[verify current priorities]</strong>)</td>
+<td>Project grants: field verification, local languages, FOI, election
+programmes</td>
+<td>Apply from month 1</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><strong>Research reports</strong></td>
+<td>Institutions, corporates</td>
+<td>Annual "State of Governance" index; quarterly state reports; custom
+research with strict independence rules</td>
+<td>Year 1+</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><strong>Premium membership</strong></td>
+<td>Engaged citizens, diaspora</td>
+<td>₦500–₦1,500/month or USD diaspora pricing: ad-free, deeper reports,
+early access, PDF downloads</td>
+<td>Year 1+</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><strong>Events</strong></td>
+<td>Sponsors, ticket buyers</td>
+<td>Town halls, candidate debates (in partnership with neutral
+organisers), awards for "Most Improved LGA" with transparent
+criteria</td>
+<td>Year 2+</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><strong>Training &amp; tools</strong></td>
+<td>CSOs, journalists, universities</td>
+<td>Data journalism training, white-label tracker tools for other
+African countries</td>
+<td>Year 2+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What NOT to sell, even when offered money:</strong></p>
+<ul>
+<li>"Reputation management" for politicians.</li>
+<li>Users' political views or targeting data.</li>
+<li>Early access to scores for campaigns.</li>
+<li>Exclusive data that lets one party gain an advantage.</li>
+</ul>
+<p>POL Pro must be available to all parties on equal terms, or to
+none.</p>
+<h2
+id="143-revenue-estimates-illustrative-scenarios-recalculate-with-real-data">14.3
+Revenue estimates (illustrative scenarios; recalculate with real
+data)</h2>
+<p><strong>Assumptions:</strong> exchange rate ~₦1,500/USD
+<strong>[verify]</strong>; Nigerian display ad effective rates are low
+(roughly <span class="math inline">0.20–</span>1.50 per 1,000 page views
+depending on format and season, <strong>[verify with real ad network
+data]</strong>); election seasons raise traffic several times over.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Stream (Year 1, conservative)</th>
+<th>Low</th>
+<th>Mid</th>
+<th>High</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ads (web + app)</td>
+<td>$3k</td>
+<td>$12k</td>
+<td>$35k</td>
+</tr>
+<tr class="even">
+<td>Social monetisation</td>
+<td>$1k</td>
+<td>$6k</td>
+<td>$20k</td>
+</tr>
+<tr class="odd">
+<td>Sponsored content</td>
+<td>$5k</td>
+<td>$25k</td>
+<td>$60k</td>
+</tr>
+<tr class="even">
+<td>POL Pro</td>
+<td>$0</td>
+<td>$15k</td>
+<td>$50k</td>
+</tr>
+<tr class="odd">
+<td>Media licensing</td>
+<td>$2k</td>
+<td>$10k</td>
+<td>$40k</td>
+</tr>
+<tr class="even">
+<td>Grants</td>
+<td>$25k</td>
+<td>$100k</td>
+<td>$250k</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>~$36k</strong></td>
+<td><strong>~$168k</strong></td>
+<td><strong>~$455k</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>By Year 3</strong> (with 4 years of data building and every
+state covered), POL Pro, media licensing and research reports should
+become the main income. Grants should fall below 40% of revenue.</p>
+<p><strong>The honest point:</strong> traffic and posting alone will not
+pay for a team doing serious verification in a market with low ad rates.
+<strong>Data products, licensing and grants</strong> are what make the
+business sustainable. Traffic is what makes those valuable.</p>
+<h2 id="144-key-metrics-kpis">14.4 Key metrics (KPIs)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Metric</th>
+<th>Year-1 target (ambitious but possible)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reach</td>
+<td>Monthly active users (app + web)</td>
+<td>500k (election months 2M+)</td>
+</tr>
+<tr class="even">
+<td>Reach</td>
+<td>Social followers across platforms</td>
+<td>1M</td>
+</tr>
+<tr class="odd">
+<td>Reach</td>
+<td>WhatsApp channel subscribers</td>
+<td>200k</td>
+</tr>
+<tr class="even">
+<td>Depth</td>
+<td>% users with home ward set</td>
+<td>60%</td>
+</tr>
+<tr class="odd">
+<td>Depth</td>
+<td>Verified users</td>
+<td>150k</td>
+</tr>
+<tr class="even">
+<td>Trust</td>
+<td>Corrections per 1,000 items</td>
+<td>&lt; 2</td>
+</tr>
+<tr class="odd">
+<td>Trust</td>
+<td>Balance report deviation by party</td>
+<td>Within ±10%</td>
+</tr>
+<tr class="even">
+<td>Data</td>
+<td>Officials with Medium+ confidence score</td>
+<td>100% federal; 100% pilot state</td>
+</tr>
+<tr class="odd">
+<td>Data</td>
+<td>Projects verified on ground</td>
+<td>1,000+</td>
+</tr>
+<tr class="even">
+<td>Revenue</td>
+<td>Paying Pro clients</td>
+<td>15–30</td>
+</tr>
+<tr class="odd">
+<td>Revenue</td>
+<td>Revenue diversity (largest stream share)</td>
+<td>&lt; 60% Year 1, &lt; 40% Year 3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="15-roadmap-from-today-to-a-national-platform">15. Roadmap: from
+today to a national platform</h1>
+<p>Today is October 2026. The plan below fits the 2027 election
+season.</p>
+<h2 id="phase-0-foundation-weeks-04">Phase 0: Foundation (weeks
+0–4)</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Confirm name; trademark, domains and
+social handles.</label></li>
+<li><label><input type="checkbox" />Register the company with CAC; open
+a bank account.</label></li>
+<li><label><input type="checkbox" />Engage a media/tech lawyer; draft
+privacy policy, terms, editorial principles.</label></li>
+<li><label><input type="checkbox" />Recruit core team: tech lead,
+editor-in-chief, 2 data editors.</label></li>
+<li><label><input type="checkbox" />Form the Methodology Advisory Panel
+(3–5 people).</label></li>
+<li><label><input type="checkbox" />Approach 3–5 partners (data,
+fact-checking, media).</label></li>
+<li><label><input type="checkbox" />Submit the first 2–3 grant
+applications.</label></li>
+<li><label><input type="checkbox" />Set up the repository, cloud
+accounts, security basics.</label></li>
+</ul>
+<h2 id="phase-a-election-sprint-months-14-before-the-elections">Phase A:
+Election Sprint (months 1–4, before the elections)</h2>
+<p>Goal: be useful <strong>this</strong> election, with a lean but
+credible product.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Directory: President, VP, 36
+governors and deputies, 109 senators, 360 reps, ministers.</label></li>
+<li><label><input type="checkbox" />Candidate profiles for presidential
+and governorship candidates of the major parties.</label></li>
+<li><label><input type="checkbox" /><strong>Record panels</strong> for
+incumbents seeking re-election: promises vs delivery, flagship projects,
+attendance and bills (legislators).</label></li>
+<li><label><input type="checkbox" />Curated news feed (federal + state)
+with confidence labels.</label></li>
+<li><label><input type="checkbox" />Reactions + Citizen Approval bar
+(with verification).</label></li>
+<li><label><input type="checkbox" />Website (SEO-first) + Android app +
+WhatsApp channel.</label></li>
+<li><label><input type="checkbox" />Scorecard generator + social handles
+live.</label></li>
+<li><label><input type="checkbox" />Election-day: link to official INEC
+IReV results and accredited observer data only.</label></li>
+<li><label><input type="checkbox" />Load testing, DDoS protection,
+crisis playbook.</label></li>
+</ul>
+<p><em>Performance Scores in Phase A:</em> publish only where data
+reaches Medium confidence. Otherwise show the record without a number.
+Better to be credible than complete.</p>
+<h2 id="phase-b-day-one-tracking-months-410-from-inauguration">Phase B:
+Day-One Tracking (months 4–10, from inauguration)</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" /><strong>Start every new term on 29
+May 2027</strong>: log inaugural promises within the first 2
+weeks.</label></li>
+<li><label><input type="checkbox" /><strong>Pilot state, every
+level:</strong> state assembly, LGA chairmen, councillors.</label></li>
+<li><label><input type="checkbox" />Projects map + citizen
+verification.</label></li>
+<li><label><input type="checkbox" />Promise tracker for all federal and
+pilot-state officials.</label></li>
+<li><label><input type="checkbox" />iOS app; Pidgin +
+Hausa/Yoruba/Igbo.</label></li>
+<li><label><input type="checkbox" />POL Pro beta for 5–10 launch
+clients.</label></li>
+<li><label><input type="checkbox" />First quarterly State Governance
+Report.</label></li>
+</ul>
+<h2 id="phase-c-national-scale-months-1024">Phase C: National scale
+(months 10–24)</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Expand to 6 states (one per
+geopolitical zone), then all 36 + FCT.</label></li>
+<li><label><input type="checkbox" />State fellows network.</label></li>
+<li><label><input type="checkbox" />Commissioners and key agency
+heads.</label></li>
+<li><label><input type="checkbox" />FOI programme at scale.</label></li>
+<li><label><input type="checkbox" />Public API; embeddable
+widgets.</label></li>
+<li><label><input type="checkbox" />Off-cycle governorship elections
+(e.g. Anambra, Edo, Ondo, Kogi, Bayelsa, Imo, Ekiti, Osun
+<strong>[verify their dates]</strong>): special coverage.</label></li>
+<li><label><input type="checkbox" />Annual independent method
+audit.</label></li>
+</ul>
+<h2 id="phase-d-mature-platform-years-24">Phase D: Mature platform
+(years 2–4)</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Full four-year record for every
+office holder in time for the next general elections.</label></li>
+<li><label><input type="checkbox" />USSD/SMS access; radio
+syndication.</label></li>
+<li><label><input type="checkbox" />Annual "State of Governance" index
+and awards.</label></li>
+<li><label><input type="checkbox" />Expansion of the model to other
+African democracies (Ghana, Kenya, etc.) as a white-label
+product.</label></li>
+</ul>
+<hr />
+<h1 id="16-team-and-budget">16. Team and budget</h1>
+<h2 id="161-team-plan">16.1 Team plan</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Phase A</th>
+<th>Phase B</th>
+<th>Phase C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Founder / CEO</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Tech lead (full-stack)</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Developers (mobile/web/data)</td>
+<td>1–2</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Editor-in-chief</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Data editors / researchers</td>
+<td>2</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>State fellows (part-time)</td>
+<td>0</td>
+<td>1–3</td>
+<td>37</td>
+</tr>
+<tr class="odd">
+<td>Community moderators</td>
+<td>1–2</td>
+<td>3</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>Social media / video producer</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Partnerships &amp; sales (Pro, sponsors)</td>
+<td>founder</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Legal (retainer)</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>Data Protection Officer (can be outsourced)</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Advisory Panel (unpaid / honorarium)</td>
+<td>3–5</td>
+<td>5</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<h2
+id="162-budget-estimates-monthly-lagosabuja-based-mid-range-verify-current-salaries">16.2
+Budget estimates (monthly, Lagos/Abuja-based, mid-range; <strong>[verify
+current salaries]</strong>)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Phase A (₦/month)</th>
+<th>Phase B (₦/month)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Salaries (team above)</td>
+<td>8–14M</td>
+<td>15–25M</td>
+</tr>
+<tr class="even">
+<td>State fellows</td>
+<td>—</td>
+<td>0.5–1.5M</td>
+</tr>
+<tr class="odd">
+<td>Cloud hosting, CDN, security</td>
+<td>0.5–1.5M</td>
+<td>1–3M</td>
+</tr>
+<tr class="even">
+<td>AI / API costs (LLM, KYC verification, news APIs, social APIs)</td>
+<td>0.5–2M</td>
+<td>1–4M</td>
+</tr>
+<tr class="odd">
+<td>SMS / WhatsApp messaging</td>
+<td>0.2–0.8M</td>
+<td>0.5–2M</td>
+</tr>
+<tr class="even">
+<td>Legal retainer + compliance</td>
+<td>0.5–1.5M</td>
+<td>0.8–2M</td>
+</tr>
+<tr class="odd">
+<td>Marketing &amp; content production</td>
+<td>1–3M</td>
+<td>1.5–4M</td>
+</tr>
+<tr class="even">
+<td>Office, internet, power (incl. backup power), misc.</td>
+<td>0.5–1.5M</td>
+<td>1–2M</td>
+</tr>
+<tr class="odd">
+<td><strong>Total monthly</strong></td>
+<td><strong>~₦12–26M</strong></td>
+<td><strong>~₦21–44M</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>One-off setup costs:</strong> company and trademark
+registration, legal drafting, equipment, design and branding, security
+audit. Estimate ₦5–15M.</p>
+<p><strong>Budget for 12 months:</strong> roughly ₦250M–₦500M (~<span
+class="math inline">170<em>k</em>–</span>330k at ₦1,500/USD)
+<strong>[estimate]</strong>. A lean version (founder + 3–4 people,
+federal-only scope, volunteers) could start for a fraction of that.</p>
+<h2 id="163-funding-plan">16.3 Funding plan</h2>
+<ol type="1">
+<li><strong>Pre-launch:</strong> founder funds + small grants + friends
+&amp; family, enough for Phase 0 and a lean Phase A.</li>
+<li><strong>Phase A–B:</strong> civic-tech / democracy grants (main
+funding) + early sponsorships.</li>
+<li><strong>Phase B–C:</strong> impact investors / angel round into POL
+Technologies Ltd, with the editorial independence clause. Pro and
+licensing revenue grow.</li>
+<li><strong>Year 3+:</strong> revenue covers most costs; grants fund
+expansion and public-good work.</li>
+</ol>
+<hr />
+<h1 id="17-measuring-social-impact">17. Measuring social impact</h1>
+<p>Funders and the public will ask: "Does this actually help?"
+Track:</p>
+<ul>
+<li><strong>Voter knowledge:</strong> surveys of users vs non-users on
+"Can you name your councillor / rep?"</li>
+<li><strong>Use in public life:</strong> number of news stories, debates
+and parliamentary questions citing POL data.</li>
+<li><strong>Official responsiveness:</strong> right-of-reply rate;
+number of officials publishing budgets and project lists after being
+scored.</li>
+<li><strong>Project outcomes:</strong> abandoned projects restarted
+after POL coverage.</li>
+<li><strong>FOI compliance:</strong> response rates over time.</li>
+<li>Partner with a university for an <strong>independent impact
+evaluation</strong> in Year 2.</li>
+</ul>
+<hr />
+<h1 id="18-launch-checklist">18. Launch checklist</h1>
+<p><strong>Legal &amp; governance</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Company registered; trademark
+filed</label></li>
+<li><label><input type="checkbox" />Lawyer engaged; terms, privacy
+policy, editorial principles published</label></li>
+<li><label><input type="checkbox" />NDPA compliance: DPO, consent flows,
+data processing records</label></li>
+<li><label><input type="checkbox" />Editorial handbook, corrections and
+right-of-reply policies</label></li>
+<li><label><input type="checkbox" />Advisory Panel formed; method v1.0
+reviewed and published</label></li>
+<li><label><input type="checkbox" />Funder list page live</label></li>
+</ul>
+<p><strong>Product &amp; data</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Federal &amp; governor directory
+100% complete and double-checked</label></li>
+<li><label><input type="checkbox" />Ingestion pipeline running; editors
+trained</label></li>
+<li><label><input type="checkbox" />Confidence labels and attribution
+rules applied</label></li>
+<li><label><input type="checkbox" />Verification (phone/KYC) working;
+bot defences active</label></li>
+<li><label><input type="checkbox" />Comment moderation tools and team in
+place, covering supported languages</label></li>
+<li><label><input type="checkbox" />Scorecard generator + human approval
+flow</label></li>
+</ul>
+<p><strong>Security &amp; operations</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />CDN/DDoS protection, WAF, rate
+limits</label></li>
+<li><label><input type="checkbox" />2FA for all staff, least-privilege
+access</label></li>
+<li><label><input type="checkbox" />Backups tested; incident response
+plan</label></li>
+<li><label><input type="checkbox" />Load test passed (50×
+normal)</label></li>
+<li><label><input type="checkbox" />Crisis playbook
+rehearsed</label></li>
+</ul>
+<p><strong>Distribution &amp; revenue</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Social handles verified; content
+calendar for the first 60 days</label></li>
+<li><label><input type="checkbox" />WhatsApp channel live</label></li>
+<li><label><input type="checkbox" />Ad network approved; brand-safety
+settings</label></li>
+<li><label><input type="checkbox" />At least 1 media partner and 1 data
+partner signed</label></li>
+<li><label><input type="checkbox" />Grant applications
+submitted</label></li>
+<li><label><input type="checkbox" />POL Pro waiting list
+page</label></li>
+</ul>
+<hr />
+<h1 id="19-glossary">19. Glossary</h1>
+<ul>
+<li><strong>LGA:</strong> Local Government Area (774 in Nigeria,
+including 6 FCT Area Councils).</li>
+<li><strong>Ward:</strong> smallest electoral unit above polling units;
+each elects a councillor.</li>
+<li><strong>SIEC:</strong> State Independent Electoral Commission, which
+runs LGA elections.</li>
+<li><strong>INEC / IReV:</strong> Independent National Electoral
+Commission / its online result viewing portal.</li>
+<li><strong>NDPA / NDPC:</strong> Nigeria Data Protection Act 2023 /
+Nigeria Data Protection Commission.</li>
+<li><strong>FOI:</strong> Freedom of Information (Act 2011).</li>
+<li><strong>CPM:</strong> advertising revenue per 1,000
+impressions.</li>
+<li><strong>Brigading:</strong> coordinated mass reactions to distort a
+score.</li>
+<li><strong>Confidence level:</strong> how much verified data a score
+rests on.</li>
+<li><strong>Right of reply:</strong> an official's chance to respond
+before and after publication.</li>
+</ul>
+<hr />
+<h1 id="20-next-steps-the-next-14-days">20. Next steps (the next 14
+days)</h1>
+<ol type="1">
+<li>Decide on the final name and secure domains and handles.</li>
+<li>Book a consultation with a Nigerian media and technology lawyer
+(bring sections 11 and 12).</li>
+<li>Write a one-page summary for funders and partners (using sections
+1–3 and 14).</li>
+<li>Contact 3 potential partners (e.g. a fact-checker, a budget
+transparency group, a media house).</li>
+<li>Recruit or confirm a tech lead and an editor-in-chief.</li>
+<li>Start building the federal directory (469 legislators + 36
+governors) in a spreadsheet. This is useful even before the app
+exists.</li>
+<li>Choose the pilot state for Phase B.</li>
+<li>Start Phase A development: directory, profiles, curated feed,
+scorecard generator.</li>
+</ol>
+<button class="theme-toggle" type="button" onclick="(function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);r.setAttribute('data-theme',d?'light':'dark')})()">Light / dark</button>
+<script>
+// Wrap the contents list and the body in a two-column layout.
+(function(){var toc=document.getElementById('TOC');if(!toc)return;var main=document.createElement('main');var hdr=document.getElementById('title-block-header');var nodes=[].slice.call(document.body.childNodes);var layout=document.createElement('div');layout.className='layout';nodes.forEach(function(n){if(n!==toc&&!(n.classList&&n.classList.contains('theme-toggle'))&&n.nodeName!=='SCRIPT')main.appendChild(n)});var d=document.createElement('details');var sm=document.createElement('summary');sm.textContent='Contents';d.appendChild(sm);while(toc.firstChild)d.appendChild(toc.firstChild);toc.appendChild(d);if(matchMedia('(min-width: 901px)').matches)d.open=true;toc.addEventListener('click',function(e){if(e.target.tagName==='A'&&!matchMedia('(min-width: 901px)').matches)d.open=false});layout.appendChild(toc);layout.appendChild(main);document.body.insertBefore(layout,document.body.firstChild);})();
+</script>
+</body>
+</html>
