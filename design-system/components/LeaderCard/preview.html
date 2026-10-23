@@ -1,0 +1,14 @@
+<!-- @dsCard group="Cards" height=230 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>LeaderCard — preview</title>
+<style>body{margin:0;padding:16px;background:var(--page);color:var(--ink);font-family:var(--font-sans);}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var P = window.POL, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 560 } }, h(P.LeaderCard, { name: 'Amina Bello', party: 'NNPP', officeTitle: 'Chairman, Tarauni LGA', inOffice: '2 years 3 months', performance: 68, confidence: 'high', approvePct: 62, verifiedResidents: 1204 })));
+</script>
+</body>
+</html>

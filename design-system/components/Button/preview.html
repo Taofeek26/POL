@@ -1,0 +1,14 @@
+<!-- @dsCard group="Actions" height=64 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Button — preview</title>
+<style>body{margin:0;padding:16px;background:var(--page);color:var(--ink);font-family:var(--font-sans);}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var P = window.POL, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'flex', gap: 8, flexWrap: 'wrap' } }, h(P.Button, { variant: 'primary' }, 'Show my leaders'), h(P.Button, null, 'Compare'), h(P.Button, { pressed: true }, '\uD83D\uDC4D Approve'), h(P.Button, { variant: 'ghost' }, 'How scores work'), h(P.Button, { variant: 'primary', disabled: true }, 'Disabled')));
+</script>
+</body>
+</html>

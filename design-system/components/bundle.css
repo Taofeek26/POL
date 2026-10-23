@@ -1,0 +1,86 @@
+/* POL components. Every value comes from tokens.css; nothing literal but structure. */
+.pol, .pol * { box-sizing: border-box; }
+.pol { font-family: var(--font-sans); color: var(--ink); font-size: 16px; line-height: 24px; }
+.pol a { color: var(--green-deep); text-decoration: none; font-weight: 600; }
+.pol a:hover { text-decoration: underline; }
+.pol :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* App bar */
+.pol-header { background: var(--header); color: var(--on-header); box-shadow: var(--shadow-bar); }
+.pol-header__in { max-width: var(--content-width); margin: 0 auto; padding: 0 var(--space-4); display: flex; align-items: center; gap: var(--space-4); min-height: 60px; }
+.pol-wordmark { font-size: 22px; line-height: 24px; font-weight: 800; letter-spacing: .06em; color: var(--on-header) !important; display: inline-flex; align-items: center; gap: var(--space-2); }
+.pol-wordmark__dot { width: 10px; height: 10px; border-radius: var(--radius-pill); background: var(--on-header); }
+.pol-nav { display: flex; gap: var(--space-1); overflow-x: auto; flex: 1; scrollbar-width: none; }
+.pol-nav a { color: var(--on-header) !important; font-size: 14px; font-weight: 600; padding: 0 var(--space-3); min-height: var(--tap-target); display: inline-flex; align-items: center; border-bottom: 3px solid transparent; white-space: nowrap; }
+.pol-nav a:hover { text-decoration: none; border-bottom-color: var(--on-header); }
+.pol-nav a[aria-current="page"] { border-bottom-color: var(--on-header); }
+
+/* Buttons */
+.pol-btn { font: inherit; font-size: 14px; font-weight: 600; line-height: 20px; min-height: var(--tap-target); padding: 0 var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); }
+.pol-btn:hover { border-color: var(--green-deep); color: var(--green-deep); }
+.pol-btn--primary { background: var(--green); border-color: var(--green); color: var(--on-green); }
+.pol-btn--primary:hover { background: var(--green-deep); border-color: var(--green-deep); color: var(--on-green); }
+.pol-btn--ghost { border-color: transparent; background: transparent; color: var(--green-deep); }
+.pol-btn--ghost:hover { background: var(--green-tint); }
+.pol-btn[aria-pressed="true"] { background: var(--green-tint); border-color: var(--green-deep); color: var(--green-deep); }
+.pol-btn--sm { min-height: 40px; padding: 0 var(--space-3); font-size: 14px; }
+.pol-btn:disabled { opacity: .45; cursor: default; }
+.pol-btn--primary:disabled:hover { background: var(--green); border-color: var(--green); }
+
+/* Tag, pill, banner */
+.pol-tag { display: inline-flex; align-items: center; font-size: 12px; line-height: 16px; font-weight: 600; padding: 2px var(--space-2); border-radius: var(--radius-sm); background: var(--surface-sunken); color: var(--ink-muted); white-space: nowrap; }
+.pol-pill { display: inline-flex; align-items: center; gap: var(--space-1); font-size: 12px; line-height: 16px; font-weight: 600; padding: 3px var(--space-2) 3px 6px; border-radius: var(--radius-pill); border: 1px solid currentColor; background: var(--surface); white-space: nowrap; }
+.pol-pill svg { width: 12px; height: 12px; flex: none; }
+.pol-pill--announced { color: var(--status-announced); }
+.pol-pill--reported { color: var(--status-reported); }
+.pol-pill--verified { color: var(--status-verified); }
+.pol-pill--disputed { color: var(--status-disputed); }
+.pol-banner { background: var(--green-tint); color: var(--ink); border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4); font-size: 14px; line-height: 20px; display: flex; gap: var(--space-3); align-items: flex-start; }
+.pol-banner__mark { flex: none; width: 4px; align-self: stretch; border-radius: var(--radius-pill); background: var(--green); }
+
+/* Scores */
+.pol-perf { display: inline-flex; flex-direction: column; align-items: flex-start; min-width: 88px; }
+.pol-perf__num { font-size: 32px; line-height: 32px; font-weight: 800; letter-spacing: -.02em; color: var(--ink); }
+.pol-perf__num small { font-size: 14px; font-weight: 600; color: var(--ink-muted); letter-spacing: 0; margin-left: 2px; }
+.pol-perf__lbl { margin-top: var(--space-1); font-size: 11px; line-height: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
+.pol-perf__conf { display: inline-flex; align-items: center; gap: 6px; margin-top: var(--space-1); font-size: 12px; line-height: 16px; color: var(--ink-muted); }
+.pol-dots { display: inline-flex; gap: 3px; }
+.pol-dots i { width: 8px; height: 8px; border-radius: var(--radius-pill); border: 1.5px solid var(--green-deep); }
+.pol-dots i.on { background: var(--green-deep); }
+.pol-perf--none .pol-perf__num { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--ink-muted); letter-spacing: 0; }
+
+.pol-approval__bar { display: flex; height: 12px; border-radius: var(--radius-pill); overflow: hidden; background: var(--bar-track); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.pol-approval__up { background: var(--approve); }
+.pol-approval__down { background: var(--disapprove); }
+.pol-approval__up + .pol-approval__down { border-left: 2px solid var(--surface); }
+.pol-approval--low .pol-approval__up, .pol-approval--low .pol-approval__down { opacity: .4; }
+.pol-approval__legend { display: flex; justify-content: space-between; gap: var(--space-2); margin-top: 6px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.pol-approval__note { margin-top: 2px; font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+/* Cards */
+.pol-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-4); }
+@media (min-width: 640px) { .pol-card { padding: var(--space-5); } }
+.pol-leader__head { display: grid; grid-template-columns: var(--avatar) 1fr; gap: var(--space-3); align-items: center; }
+.pol-avatar { width: var(--avatar); height: var(--avatar); border-radius: var(--radius-pill); background: var(--green-tint); color: var(--green-deep); display: grid; place-items: center; font-weight: 800; font-size: 18px; letter-spacing: .02em; }
+.pol-avatar--lg { width: var(--avatar-lg); height: var(--avatar-lg); font-size: 24px; }
+.pol-leader__name { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.pol-leader__name a { color: var(--ink); font-size: 17px; line-height: 24px; font-weight: 700; }
+.pol-leader__office { font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+.pol-leader__scores { display: grid; grid-template-columns: auto 1fr; gap: var(--space-5); align-items: start; margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--line); }
+
+.pol-meta { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+.pol-news__title { margin: var(--space-3) 0 var(--space-1); font-size: 17px; line-height: 24px; font-weight: 700; }
+.pol-news__title a { color: var(--ink); }
+.pol-news__summary { margin: 0 0 var(--space-3); }
+
+.pol-reactions { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--line); }
+.pol-reactions .pol-btn { font-weight: 500; }
+.pol-reactions .pol-btn b { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Forms */
+.pol-field { display: flex; flex-direction: column; gap: 6px; }
+.pol-field label { font-size: 14px; line-height: 20px; font-weight: 600; color: var(--ink); }
+.pol-field select, .pol-field input { font: inherit; min-height: var(--tap-target); padding: 0 var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: var(--surface); color: var(--ink); width: 100%; }
+.pol-field select:disabled, .pol-field input:disabled { background: var(--surface-sunken); color: var(--ink-muted); }
+.pol-field__hint { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+.pol-field__error { font-size: 13px; line-height: 18px; color: var(--status-disputed); font-weight: 600; }

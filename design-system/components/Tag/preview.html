@@ -1,0 +1,14 @@
+<!-- @dsCard group="Status" height=56 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Tag — preview</title>
+<style>body{margin:0;padding:16px;background:var(--page);color:var(--ink);font-family:var(--font-sans);}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var P = window.POL, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'flex', gap: 8 } }, h(P.Tag, null, 'PDP'), h(P.Tag, null, 'APC'), h(P.Tag, null, 'roads'), h(P.Tag, null, 'health')));
+</script>
+</body>
+</html>

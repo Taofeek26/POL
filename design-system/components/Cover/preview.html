@@ -1,0 +1,58 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>POL</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--page); color:var(--ink); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; width:960px; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .green { fill:var(--green); }
+  .tint { fill:var(--green-tint); }
+  .deep { fill:var(--approve); }
+  .blk { rx:var(--radius-lg); }
+  .bar { rx:6px; }
+  .bar.white { fill:var(--surface); }
+  .bar.g { fill:var(--green); }
+  .bar.d { fill:var(--disapprove); }
+  .words { position:absolute; left:var(--space-8); bottom:var(--space-8); max-width:440px; }
+  .name { margin:0; font-size:120px; line-height:.92; font-weight:800; letter-spacing:.02em; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 6px; font-size:14px; line-height:20px; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      green 176×272 slab bled off the top (the flag green, largest) · green-tint 160×192 · approve 128×232 bled off the right · disapprove only as one short bar segment (it only ever means "disapprove") ≈ 38% of 960×288
+  arrangement one tall green slab with two satellites, bottoms on one line space-8 above the edge, space-4 gutters
+  pattern     literal motif, the Citizen Approval bar: radius-pill bars space-3 tall at a space-8 pitch, cut white out of the green slab (the scorecard rows) and drawn in green on the tint, one split with a disapprove segment
+  scales      sides in space-4 multiples; gutters space-4; bar height space-3, pitch space-8; block corners radius-lg, bars radius-pill (rx = half of space-3)
+-->
+<rect class="green blk" x="0" y="-16" width="176" height="272" rx="14"/>
+<rect class="bar white" x="24" y="40"  width="128" height="12" rx="6"/>
+<rect class="bar white" x="24" y="72"  width="96"  height="12" rx="6"/>
+<rect class="bar white" x="24" y="104" width="112" height="12" rx="6"/>
+<rect class="bar white" x="24" y="136" width="64"  height="12" rx="6"/>
+<rect class="bar white" x="24" y="168" width="120" height="12" rx="6"/>
+<rect class="bar white" x="24" y="200" width="80"  height="12" rx="6"/>
+<rect class="tint blk" x="192" y="64" width="160" height="192" rx="14"/>
+<rect class="bar g" x="208" y="96"  width="112" height="12" rx="6"/>
+<rect class="bar g" x="208" y="128" width="80"  height="12" rx="6"/>
+<rect class="bar g" x="208" y="160" width="88"  height="12" rx="6"/>
+<rect class="bar d" x="300" y="160" width="36"  height="12" rx="6"/>
+<rect class="bar g" x="208" y="192" width="56"  height="12" rx="6"/>
+<rect class="deep blk" x="368" y="24" width="128" height="232" rx="14"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">POL</h1>
+<p class="tag">Know your leaders: a public scorecard for every office in Nigeria.</p>
+</div>
+</div>
+</body>
+</html>

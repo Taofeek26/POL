@@ -1,0 +1,14 @@
+<!-- @dsCard group="Forms" height=190 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Field — preview</title>
+<style>body{margin:0;padding:16px;background:var(--page);color:var(--ink);font-family:var(--font-sans);}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var P = window.POL, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12 } }, h(P.Field, { label: 'State', options: ['Kano', 'Lagos', 'Enugu'], value: 'Kano', onChange: function(){} }), h(P.Field, { label: 'LGA', options: ['Tarauni', 'Nassarawa'], hint: 'Local Government Area' }), h(P.Field, { label: 'Ward', options: [], disabled: true, placeholder: 'Choose an LGA first' })));
+</script>
+</body>
+</html>
